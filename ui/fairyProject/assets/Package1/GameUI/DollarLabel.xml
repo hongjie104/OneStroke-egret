@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="128,36">
+  <displayList>
+    <image id="n0_kgm3" name="n0" src="kgm35" fileName="dollar_bg.png" xy="0,0"/>
+    <text id="n1_kgm3" name="n1" xy="46,0" size="69,36" fontSize="28" color="#7a7a7a" align="center" vAlign="middle" autoSize="none" text="36"/>
+  </displayList>
+</component>

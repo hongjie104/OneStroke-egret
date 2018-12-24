@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="9x94xxcs" jpegQuality="80" compressPNG="true">
+  <resources>
+    <image id="kgm30" name="btn_1.png" path="/"/>
+    <image id="kgm31" name="btn_2.png" path="/"/>
+    <image id="kgm32" name="btn_3.png" path="/"/>
+    <image id="kgm33" name="btn_4.png" path="/"/>
+    <image id="kgm34" name="btn_back.png" path="/"/>
+    <image id="kgm35" name="dollar_bg.png" path="/"/>
+    <component id="kgm36" name="GameUI.xml" path="/GameUI/" exported="true"/>
+    <component id="kgm37" name="Btn_back.xml" path="/GameUI/"/>
+    <component id="kgm38" name="Btn_complaint.xml" path="/GameUI/"/>
+    <component id="kgm39" name="Btn_replay.xml" path="/GameUI/"/>
+    <component id="kgm3a" name="Btn_dollar_tip.xml" path="/GameUI/"/>
+    <component id="kgm3b" name="Btn_free_tip.xml" path="/GameUI/"/>
+    <component id="kgm3c" name="Label.xml" path="/GameUI/"/>
+    <component id="kgm3d" name="DollarLabel.xml" path="/GameUI/"/>
+  </resources>
+  <publish name="Package1" path="/Users/eddie104/Documents/hongjie/OneStroke-egret/resource/assets"/>
+</packageDescription>

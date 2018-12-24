@@ -29,6 +29,8 @@
 
 class Main extends egret.DisplayObjectContainer {
 
+    private _gameContainer: egret.DisplayObjectContainer;
+
     private gameScene: GameScene;
 
     public constructor() {
@@ -90,9 +92,20 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private async createGameScene() {
-        const levelJson = await RES.getResAsync("level_json")
+        // 初始化UI
+        const ui = UI.instance;
+        ui.stageWidth = this.stage.stageWidth;
+        ui.stageHeight = this.stage.stageHeight;
+        fairygui.UIPackage.addPackage("ui_bin");
+        fairygui.UIConfig.defaultFont = "宋体";
+
+        this._gameContainer = new egret.DisplayObjectContainer();
+        const levelJson = await RES.getResAsync("level_json");
         this.gameScene = new GameScene(levelJson);
-        this.addChild(this.gameScene);
+        this._gameContainer.addChild(this.gameScene);
+        this.addChild(this._gameContainer);
+
+        this.addChild(fairygui.GRoot.inst.displayObject);
     }
 
     /**

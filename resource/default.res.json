@@ -1,7 +1,7 @@
 {
 	"groups":[
 	{
-		"keys":"bg_jpg,egret_icon_png,level_json",
+		"keys":"bg_jpg,egret_icon_png,level_json,ui_bin,ui_bin_atlas0",
 		"name":"preload"
 	}],
 	"resources":[
@@ -19,5 +19,13 @@
 		"name":"level_json",
 		"type":"json",
 		"url":"config/level.json"
+	},{
+		"name": "ui_bin",
+		"type":"bin",
+		"url":"assets/Package1.fui"
+	},{
+		"name":"ui_bin_atlas0",
+		"type":"image",
+		"url":"assets/Package1_atlas0.png"
 	}]
 }

@@ -20,6 +20,10 @@
     },
     {
       "name": "promise"
+    },
+    {
+      "name": "fairygui",
+      "path": "./libs/fairygui"
     }
   ]
 }

@@ -2,9 +2,9 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private static GAP  = 12;
 
-    private static CELL_SIZE = 65;
+    private static CELL_SIZE = 86;
 
-    private static CELL_ELLIPSE = 12;
+    private static CELL_ELLIPSE = 16;
 
     private cellArr = new Array<Array<Cell>>();
 
@@ -17,6 +17,8 @@ class GameScene extends egret.DisplayObjectContainer {
     // 当前关卡
     private curLevel = 1;
 
+    private _ui: fairygui.GComponent;
+
     constructor(private _levelJson: Array<Array<Array<number>>>) {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
@@ -25,6 +27,17 @@ class GameScene extends egret.DisplayObjectContainer {
     private onAddToStage() {
         this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         this.drawCell();
+
+        this._ui = UI.instance.createPanel('GameUI');
+        fairygui.GRoot.inst.addChild(this._ui);
+        this._ui.getChild('n1').asButton.addClickListener(this.onBack, this);
+        this._ui.getChild('n2').asButton.addClickListener(this.onComplaint, this);
+        this._ui.getChild('n3').asButton.addClickListener(this.onReplay, this);
+        this._ui.getChild('n4').asButton.addClickListener(this.onDollarTip, this);
+        this._ui.getChild('n5').asButton.addClickListener(this.onFreeTip, this);
+
+        // 金币数量
+        this._ui.getChild('n7').asCom.getChild('n1').asTextField.text = '30';
     }
 
     private drawCell() {
@@ -271,5 +284,25 @@ class GameScene extends egret.DisplayObjectContainer {
         }
         this.selectedRowAndCol.push({ row, col });
         this.drawSelectedCell();
+    }
+
+    private onBack() {
+        console.log('back');
+    }
+
+    private onComplaint() {
+        console.log('onComplaint');
+    }
+
+    private onReplay() {
+        console.log('onReplay');
+    }
+
+    private onDollarTip() {
+        console.log('onDollarTip');
+    }
+
+    private onFreeTip() {
+        console.log('onFreeTip');
     }
 }
