@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="9x94xxcs" jpegQuality="80" compressPNG="true">
   <resources>
-    <image id="kgm30" name="btn_1.png" path="/"/>
-    <image id="kgm31" name="btn_2.png" path="/"/>
-    <image id="kgm32" name="btn_3.png" path="/"/>
-    <image id="kgm33" name="btn_4.png" path="/"/>
-    <image id="kgm34" name="btn_back.png" path="/"/>
-    <image id="kgm35" name="dollar_bg.png" path="/"/>
+    <image id="kgm30" name="btn_1.png" path="/GameUI/"/>
+    <image id="kgm31" name="btn_2.png" path="/GameUI/"/>
+    <image id="kgm32" name="btn_3.png" path="/GameUI/"/>
+    <image id="kgm33" name="btn_4.png" path="/GameUI/"/>
+    <image id="kgm34" name="btn_back.png" path="/GameUI/"/>
+    <image id="kgm35" name="dollar_bg.png" path="/GameUI/"/>
     <component id="kgm36" name="GameUI.xml" path="/GameUI/" exported="true"/>
     <component id="kgm37" name="Btn_back.xml" path="/GameUI/"/>
     <component id="kgm38" name="Btn_complaint.xml" path="/GameUI/"/>
@@ -15,6 +15,22 @@
     <component id="kgm3b" name="Btn_free_tip.xml" path="/GameUI/"/>
     <component id="kgm3c" name="Label.xml" path="/GameUI/"/>
     <component id="kgm3d" name="DollarLabel.xml" path="/GameUI/"/>
+    <component id="szo0e" name="HomeUI.xml" path="/HomeUI/" exported="true"/>
+    <image id="szo0t" name="btn_5.png" path="/HomeUI/"/>
+    <image id="szo0u" name="btn_6.png" path="/HomeUI/"/>
+    <image id="szo0v" name="btn_7.png" path="/HomeUI/"/>
+    <image id="szo0w" name="btn_8.png" path="/HomeUI/"/>
+    <image id="szo0x" name="btn_level.png" path="/HomeUI/"/>
+    <image id="szo0y" name="btn_startGame.png" path="/HomeUI/"/>
+    <image id="szo0z" name="btn_startGame1.png" path="/HomeUI/"/>
+    <image id="szo010" name="title.png" path="/HomeUI/"/>
+    <component id="szo011" name="Btn_startGame.xml" path="/HomeUI/"/>
+    <component id="szo012" name="Btn_startGame1.xml" path="/HomeUI/"/>
+    <component id="szo013" name="Btn_level.xml" path="/HomeUI/"/>
+    <component id="szo014" name="Btn_rank.xml" path="/HomeUI/"/>
+    <component id="szo015" name="Btn_fuli.xml" path="/HomeUI/"/>
+    <component id="szo016" name="Btn_sound.xml" path="/HomeUI/"/>
+    <component id="szo017" name="Btn_friend.xml" path="/HomeUI/"/>
   </resources>
-  <publish name="Package1" path="/Users/eddie104/Documents/hongjie/OneStroke-egret/resource/assets"/>
+  <publish name="Package1" path="/Users/zhouhongjie/Documents/egret/OneStroke/resource/assets"/>
 </packageDescription>

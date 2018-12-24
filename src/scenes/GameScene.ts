@@ -21,15 +21,7 @@ class GameScene extends egret.DisplayObjectContainer {
 
     constructor(private _levelJson: Array<Array<Array<number>>>) {
         super();
-        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-    }
-
-    private onAddToStage() {
-        this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-        this.drawCell();
-
         this._ui = UI.instance.createPanel('GameUI');
-        fairygui.GRoot.inst.addChild(this._ui);
         this._ui.getChild('n1').asButton.addClickListener(this.onBack, this);
         this._ui.getChild('n2').asButton.addClickListener(this.onComplaint, this);
         this._ui.getChild('n3').asButton.addClickListener(this.onReplay, this);
@@ -38,6 +30,18 @@ class GameScene extends egret.DisplayObjectContainer {
 
         // 金币数量
         this._ui.getChild('n7').asCom.getChild('n1').asTextField.text = '30';
+
+        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
+        this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemoveFromStage, this);
+    }
+
+    private onAddToStage() {
+        fairygui.GRoot.inst.addChild(this._ui);
+        this.drawCell();
+    }
+
+    private onRemoveFromStage() {
+        fairygui.GRoot.inst.removeChild(this._ui);
     }
 
     private drawCell() {
@@ -287,7 +291,7 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private onBack() {
-        console.log('back');
+        this.dispatchEvent(new GameEvent(GameEvent.GO_TO_HOME));
     }
 
     private onComplaint() {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="78,78" pivot="0.5,0.5" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_szo0" name="n0" src="szo0w" fileName="HomeUI/btn_8.png" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n1_szo0" name="n1" xy="0,90" size="85,28" fontSize="20" color="#966aea" autoSize="none" text="邀请好友"/>
+  </displayList>
+  <Button downEffect="scale" downEffectValue="0.80"/>
+</component>

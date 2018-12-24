@@ -31,7 +31,13 @@ class Main extends egret.DisplayObjectContainer {
 
     private _gameContainer: egret.DisplayObjectContainer;
 
+    private _levelJson: Array<Array<Array<number>>>;
+
+    private homeScene: HomeScene;
+
     private gameScene: GameScene;
+
+    private _curScene: egret.DisplayObjectContainer;
 
     public constructor() {
         super();
@@ -92,6 +98,7 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private async createGameScene() {
+        LocalStorage.init();
         // 初始化UI
         const ui = UI.instance;
         ui.stageWidth = this.stage.stageWidth;
@@ -99,13 +106,40 @@ class Main extends egret.DisplayObjectContainer {
         fairygui.UIPackage.addPackage("ui_bin");
         fairygui.UIConfig.defaultFont = "宋体";
 
+        this._levelJson = await RES.getResAsync("level_json");
+
         this._gameContainer = new egret.DisplayObjectContainer();
-        const levelJson = await RES.getResAsync("level_json");
-        this.gameScene = new GameScene(levelJson);
-        this._gameContainer.addChild(this.gameScene);
         this.addChild(this._gameContainer);
 
         this.addChild(fairygui.GRoot.inst.displayObject);
+
+        this.showHomeScene();
+    }
+
+    private showHomeScene() {
+        this.removeCurScene();
+        if (!this.homeScene) {
+            this.homeScene = new HomeScene();
+            this.homeScene.addEventListener(GameEvent.START_GAME, this.showGameScene, this);
+        }
+        this._curScene = this.homeScene;
+        this._gameContainer.addChild(this.homeScene);
+    }
+
+    private showGameScene() {
+        this.removeCurScene();
+        if (!this.gameScene) {
+            this.gameScene = new GameScene(this._levelJson);
+            this.gameScene.addEventListener(GameEvent.GO_TO_HOME, this.showHomeScene, this);
+        }
+        this._curScene = this.gameScene;
+        this._gameContainer.addChild(this.gameScene);
+    }
+
+    private removeCurScene() {
+        if (this._curScene && this._curScene.parent === this._gameContainer) {
+            this._gameContainer.removeChild(this._curScene);
+        }
     }
 
     /**
