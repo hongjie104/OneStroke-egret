@@ -53,5 +53,5 @@
     <component id="j3ej1u" name="Btn_nextLevel.xml" path="/Success/"/>
     <component id="j3ej1v" name="Btn_freeDollar.xml" path="/Success/"/>
   </resources>
-  <publish name="Package1" path="/Users/eddie104/Documents/hongjie/OneStroke-egret/resource/assets"/>
+  <publish name="Package1" path="/Users/zhouhongjie/Documents/egret/OneStroke/resource/assets"/>
 </packageDescription>

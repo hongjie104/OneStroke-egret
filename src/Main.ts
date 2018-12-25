@@ -116,6 +116,8 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(fairygui.GRoot.inst.displayObject);
 
         this.showHomeScene();
+
+        SuccessPanel.instance.addEventListener(GameEvent.GO_TO_HOME, this.showHomeScene, this);
     }
 
     private showHomeScene() {
