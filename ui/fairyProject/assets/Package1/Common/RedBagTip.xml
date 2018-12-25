@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="325,33">
+  <displayList>
+    <image id="n2_j3ej" name="n2" src="j3ej1b" fileName="Common/redBagTipBg.png" xy="0,0"/>
+    <image id="n0_j3ej" name="n0" src="j3ej19" fileName="Common/redBag_min.png" xy="24,2"/>
+    <richtext id="n1_j3ej" name="n1" xy="52,5" size="230,25" touchable="false" fontSize="18" color="#ffffff" vAlign="middle" text="恭喜&lt;font color=&quot;#ff0000&quot;>谁谁谁&lt;/font>成功提现&lt;font color=&quot;#ffff00&quot;>20.18&lt;/font>元"/>
+  </displayList>
+</component>

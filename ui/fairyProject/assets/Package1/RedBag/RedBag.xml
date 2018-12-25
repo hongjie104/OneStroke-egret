@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="640,1136">
+  <displayList>
+    <image id="n5_j3ej" name="n5" src="j3ej1i" fileName="Common/white.png" xy="0,0" size="640,1136"/>
+    <image id="n2_j3ej" name="n2" src="j3ej1h" fileName="RedBag/redBag_2.png" xy="144,204">
+      <relation target="" sidePair="top-top,center-center"/>
+    </image>
+    <component id="n3_j3ej" name="n3" src="kgm37" fileName="Common/Btn_back.xml" xy="52,160">
+      <relation target="" sidePair="top-top,left-left"/>
+    </component>
+    <component id="n8_j3ej" name="n8" src="j3ej1j" fileName="RedBag/RedBagBadge.xml" xy="430,192" pivot="0.5,0.5">
+      <relation target="n2_j3ej" sidePair="top-top,left-right"/>
+    </component>
+    <text id="n9_j3ej" name="n9" xy="144,396" size="352,38" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="余额 ￥4.6元">
+      <relation target="" sidePair="center-center,top-top"/>
+    </text>
+    <component id="n10_j3ej" name="n10" src="j3ej1m" fileName="RedBag/RedBagEveryDay.xml" xy="117,795" pivot="0.5,0.5" group="n12_j3ej"/>
+    <component id="n11_j3ej" name="n11" src="j3ej1n" fileName="RedBag/RedBagInvitation.xml" xy="420,795" pivot="0.5,0.5" group="n12_j3ej"/>
+    <group id="n12_j3ej" name="n12" xy="117,795" size="406,127" advanced="true">
+      <relation target="n2_j3ej" sidePair="center-center,top-top"/>
+    </group>
+  </displayList>
+  <transition name="t1" autoPlay="true">
+    <item time="0" type="Scale" target="n8_j3ej" tween="true" startValue="0.2,0.2" endValue="1.2,1.2" duration="6"/>
+    <item time="6" type="Scale" target="n8_j3ej" tween="true" startValue="1.2,1.2" endValue="1,1" duration="6"/>
+  </transition>
+  <transition name="t2" autoPlay="true" autoPlayRepeat="-1">
+    <item time="0" type="Rotation" target="n10_j3ej" tween="true" startValue="0" endValue="54" duration="6"/>
+    <item time="0" type="Rotation" target="n11_j3ej" tween="true" startValue="0" endValue="54" duration="6"/>
+    <item time="6" type="Rotation" target="n10_j3ej" tween="true" startValue="54" endValue="0" duration="6"/>
+    <item time="6" type="Rotation" target="n11_j3ej" tween="true" startValue="54" endValue="0" duration="6"/>
+  </transition>
+</component>

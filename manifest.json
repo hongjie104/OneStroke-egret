@@ -9,18 +9,23 @@
 		"libs/fairygui/fairygui.js"
 	],
 	"game": [
+		"bin-debug/panels/Panel.js",
 		"bin-debug/scenes/Cell.js",
-		"bin-debug/LoadingUI.js",
 		"bin-debug/Platform.js",
 		"bin-debug/UI.js",
 		"bin-debug/events/CellEvent.js",
 		"bin-debug/events/GameEvent.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/panels/RedBag.js",
+		"bin-debug/panels/SuccessPanel.js",
 		"bin-debug/Main.js",
 		"bin-debug/scenes/GameScene.js",
-		"bin-debug/scenes/HoneScene.js",
+		"bin-debug/scenes/HomeScene.js",
 		"bin-debug/utils/bitmap.js",
 		"bin-debug/utils/LocalStorage.js",
 		"bin-debug/utils/locationProperty.js",
+		"bin-debug/utils/Math.js",
+		"bin-debug/utils/oneStroke.js",
 		"bin-debug/utils/UUID.js"
 	]
 }

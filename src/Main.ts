@@ -33,6 +33,8 @@ class Main extends egret.DisplayObjectContainer {
 
     private _levelJson: Array<Array<Array<number>>>;
 
+    private _redBagJson: { name: Array<string>, money: Array<number> };
+
     private homeScene: HomeScene;
 
     private gameScene: GameScene;
@@ -56,7 +58,6 @@ class Main extends egret.DisplayObjectContainer {
             // custom lifecycle plugin
 
             context.onUpdate = () => {
-
             };
         })
 
@@ -75,7 +76,7 @@ class Main extends egret.DisplayObjectContainer {
 
     private async runGame() {
         await this.loadResource()
-        await this.createGameScene();
+        this.createGameScene();
     }
 
     private async loadResource() {
@@ -97,7 +98,7 @@ class Main extends egret.DisplayObjectContainer {
      * 创建游戏场景
      * Create a game scene
      */
-    private async createGameScene() {
+    private createGameScene() {
         LocalStorage.init();
         // 初始化UI
         const ui = UI.instance;
@@ -106,7 +107,8 @@ class Main extends egret.DisplayObjectContainer {
         fairygui.UIPackage.addPackage("ui_bin");
         fairygui.UIConfig.defaultFont = "宋体";
 
-        this._levelJson = await RES.getResAsync("level_json");
+        this._levelJson = RES.getRes("level_json");
+        this._redBagJson = RES.getRes("redBag_json");
 
         this._gameContainer = new egret.DisplayObjectContainer();
         this.addChild(this._gameContainer);
@@ -119,7 +121,7 @@ class Main extends egret.DisplayObjectContainer {
     private showHomeScene() {
         this.removeCurScene();
         if (!this.homeScene) {
-            this.homeScene = new HomeScene();
+            this.homeScene = new HomeScene(this._redBagJson);
             this.homeScene.addEventListener(GameEvent.START_GAME, this.showGameScene, this);
         }
         this._curScene = this.homeScene;
@@ -129,7 +131,7 @@ class Main extends egret.DisplayObjectContainer {
     private showGameScene() {
         this.removeCurScene();
         if (!this.gameScene) {
-            this.gameScene = new GameScene(this._levelJson);
+            this.gameScene = new GameScene(this._levelJson, this._redBagJson);
             this.gameScene.addEventListener(GameEvent.GO_TO_HOME, this.showHomeScene, this);
         }
         this._curScene = this.gameScene;

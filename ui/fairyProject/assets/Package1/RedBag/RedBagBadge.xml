@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="116,138">
+  <displayList>
+    <image id="n0_j3ej" name="n0" src="j3ej1e" fileName="RedBag/redBag_1.png" xy="0,0"/>
+    <text id="n1_j3ej" name="n1" xy="57,32" size="26,28" fontSize="20" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="9"/>
+  </displayList>
+</component>

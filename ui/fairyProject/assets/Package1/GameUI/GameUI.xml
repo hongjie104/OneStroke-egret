@@ -8,10 +8,18 @@
     <group id="n6_kgm3" name="n6" xy="81,988" size="472,73" advanced="true" layout="hz" colGap="60">
       <relation target="" sidePair="center-center"/>
     </group>
-    <component id="n1_kgm3" name="n1" src="kgm37" fileName="GameUI/Btn_back.xml" xy="20,50" group="n8_kgm3"/>
-    <component id="n7_kgm3" name="n7" src="kgm3d" fileName="GameUI/DollarLabel.xml" xy="272,57" group="n8_kgm3"/>
-    <group id="n8_kgm3" name="n8" xy="20,50" size="380,52" advanced="true" layout="hz" colGap="200">
-      <relation target="" sidePair="left-left,top-top"/>
-    </group>
+    <component id="n1_kgm3" name="n1" src="kgm37" fileName="Common/Btn_back.xml" xy="20,50">
+      <relation target="" sidePair="top-top,left-left"/>
+    </component>
+    <component id="n7_kgm3" name="n7" src="kgm3d" fileName="GameUI/DollarLabel.xml" xy="256,57">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
+    <text id="n9_j3ej" name="n9" xy="288,103" size="64,36" fontSize="28" color="#7a7a7a" vAlign="middle" text="36关">
+      <relation target="" sidePair="center-center,top-top"/>
+    </text>
+    <richtext id="n11_j3ej" name="n11" xy="184,148" size="271,31" fontSize="24" color="#7a7a7a" vAlign="middle" text="下次红包将在&lt;font color=&quot;#ff0000&quot;>10&lt;/font>关后出现">
+      <relation target="" sidePair="center-center,top-top"/>
+    </richtext>
+    <component id="n12_j3ej" name="n12" src="j3ej1d" fileName="HomeUI/Btn_redBag.xml" xy="464,107"/>
   </displayList>
 </component>

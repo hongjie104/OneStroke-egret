@@ -18,6 +18,24 @@ class Cell extends egret.Shape {
         }
     }
 
+    public startToScale(callback?: Function, thisObj?: any) {
+        const oldX = this.x;
+        const oldY = this.y;
+        egret.Tween.get(this, {
+            onChange: () => {
+                const t = this.size * (1 - this.scaleX) / 2;
+                this.x = oldX + t;
+                this.y = oldY + t;
+            },
+            onChangeObj: this,
+        }).to({
+            scaleX: 0,
+            scaleY: 0,
+        }, 600).call(() => {
+            callback && callback.apply(thisObj);
+        }, this);
+    }
+
     private onTouchBegin() {
         this.dispatchEvent(new CellEvent(CellEvent.TRY_2_ADD_2_ARR, this._row, this._col));
     }

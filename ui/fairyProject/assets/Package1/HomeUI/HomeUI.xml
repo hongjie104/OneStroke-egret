@@ -17,8 +17,12 @@
     <group id="n10_szo0" name="n10" xy="80,900" size="480,78" advanced="true" layout="hz" colGap="56">
       <relation target="" sidePair="bottom-bottom,center-center"/>
     </group>
-    <text id="n11_szo0" name="n11" xy="244,1040" size="151,28" fontSize="20" color="#8c8c8c" text="UID: 999999999">
+    <text id="n11_szo0" name="n11" xy="244,1040" size="150,28" fontSize="20" color="#8c8c8c" text="UID: 999999999">
       <relation target="" sidePair="center-center,bottom-bottom"/>
     </text>
+    <component id="n14_j3ej" name="n14" src="j3ej1a" fileName="Common/RedBagTip.xml" xy="157,123"/>
+    <component id="n15_j3ej" name="n15" src="j3ej1d" fileName="HomeUI/Btn_redBag.xml" xy="530,680">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </component>
   </displayList>
 </component>

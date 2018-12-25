@@ -2,7 +2,7 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private static GAP  = 12;
 
-    private static CELL_SIZE = 86;
+    private static CELL_SIZE = 68;
 
     private static CELL_ELLIPSE = 16;
 
@@ -12,6 +12,8 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private selectedCellShape: egret.Shape;
 
+    private pathShap: egret.Shape;
+
     private selectedRowAndCol: Array<{ row: number, col: number }>;
 
     // 当前关卡
@@ -19,7 +21,7 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private _ui: fairygui.GComponent;
 
-    constructor(private _levelJson: Array<Array<Array<number>>>) {
+    constructor(private _levelJson: Array<Array<Array<number>>>, private _redBagJson: { name: Array<string>, money: Array<number> }) {
         super();
         this._ui = UI.instance.createPanel('GameUI');
         this._ui.getChild('n1').asButton.addClickListener(this.onBack, this);
@@ -30,6 +32,8 @@ class GameScene extends egret.DisplayObjectContainer {
 
         // 金币数量
         this._ui.getChild('n7').asCom.getChild('n1').asTextField.text = '30';
+
+        this._ui.getChild('n12').asButton.addClickListener(this.onShowRedBagPanel, this);
 
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemoveFromStage, this);
@@ -42,6 +46,10 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private onRemoveFromStage() {
         fairygui.GRoot.inst.removeChild(this._ui);
+    }
+
+    private onShowRedBagPanel() {
+        RedBag.instance.show();
     }
 
     private drawCell() {
@@ -91,6 +99,12 @@ class GameScene extends egret.DisplayObjectContainer {
             this.cellContainer.addChild(this.selectedCellShape);
         } else {
             this.cellContainer.setChildIndex(this.selectedCellShape, this.cellContainer.numChildren + 1);
+        }
+        if (!this.pathShap) {
+            this.pathShap = new egret.Shape();
+            this.cellContainer.addChild(this.pathShap);
+        } else {
+            this.cellContainer.setChildIndex(this.pathShap, this.cellContainer.numChildren + 1);
         }
         this.drawSelectedCell();
     }
@@ -233,14 +247,33 @@ class GameScene extends egret.DisplayObjectContainer {
         }
         if (success) {
             // 成功了，跳到下一关
+            this.pathShap.graphics.clear();
             const t: number = setTimeout(() => {
                 clearTimeout(t);
-                if (++this.curLevel > this._levelJson.length) {
-                    // 所有的关卡都通过了。。。
-                } else {
-                    this.drawCell();
+                this.selectedCellShape.graphics.clear();
+                for (let index = 0; index < this.cellArr.length; index++) {
+                    const element = this.cellArr[index];
+                    for (let j = 0; j < this.cellArr[index].length; j++) {
+                        this.cellArr[index][j].startToScale(index === 0 && j === 0 ? this.onCellEndScale : null, this);
+                    }
                 }
             }, 200);
+        }
+    }
+
+    private onCellEndScale() {
+        const p = SuccessPanel.instance;
+        p.show();
+        if (!p.hasEventListener(GameEvent.NEXT_LEVEL)) {
+            p.addEventListener(GameEvent.NEXT_LEVEL, this.onNextLevel, this);
+        }
+    }
+
+    private onNextLevel() {
+        if (++this.curLevel > this._levelJson.length) {
+            // 所有的关卡都通过了。。。
+        } else {
+            this.drawCell();
         }
     }
 
@@ -299,11 +332,60 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private onReplay() {
-        console.log('onReplay');
+        this.selectedRowAndCol.length = 1;
+        this.drawSelectedCell();
     }
 
     private onDollarTip() {
-        console.log('onDollarTip');
+        const path = utils.oneStroke.getPath(this._levelJson[this.curLevel - 1]);
+        // console.log(path);
+        let lastP: utils.oneStroke.Point = null;
+        let curP: utils.oneStroke.Point = null;
+        let fromP: utils.oneStroke.Point = null;
+        let endP: utils.oneStroke.Point = null;
+        let cellSize = GameScene.CELL_SIZE;
+        let gap = GameScene.GAP;
+        const g = this.pathShap.graphics;
+        g.clear();
+        g.beginFill(0x18cfdb);
+        for (let index = 1; index < path.length; index++) {
+            lastP = path[index - 1];
+            curP = path[index];
+            if (lastP.row === curP.row) {
+                if (lastP.col < curP.col) {
+                    fromP = lastP;
+                    endP = curP;
+                } else {
+                    fromP = curP;
+                    endP = lastP;
+                }
+            } else {
+                if (lastP.row < curP.row) {
+                    fromP = lastP;
+                    endP = curP;
+                } else {
+                    fromP = curP;
+                    endP = lastP;
+                }
+            }
+            g.drawRoundRect(
+                fromP.col * (cellSize + gap) + cellSize / 2 - 10,
+                fromP.row * (cellSize + gap) + cellSize / 2 - 10,
+                (endP.col - fromP.col) * gap + (endP.col - fromP.col + 1) * cellSize - (cellSize - 20),
+                (endP.row - fromP.row) * gap + (endP.row - fromP.row + 1) * cellSize - (cellSize - 20),
+                10,
+            );
+        }
+        g.endFill();
+
+
+        // g.drawRoundRect(
+        //     minCol * (cellSize + gap),
+        //     minRow * (cellSize + gap),
+        //     (maxCol - minCol) * gap + (maxCol - minCol + 1) * cellSize,
+        //     (maxRow - minRow) * gap + (maxRow - minRow + 1) * cellSize,
+        //     GameScene.CELL_ELLIPSE,
+        // );
     }
 
     private onFreeTip() {

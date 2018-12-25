@@ -5,10 +5,10 @@
     <image id="kgm31" name="btn_2.png" path="/GameUI/"/>
     <image id="kgm32" name="btn_3.png" path="/GameUI/"/>
     <image id="kgm33" name="btn_4.png" path="/GameUI/"/>
-    <image id="kgm34" name="btn_back.png" path="/GameUI/"/>
+    <image id="kgm34" name="btn_back.png" path="/Common/"/>
     <image id="kgm35" name="dollar_bg.png" path="/GameUI/"/>
     <component id="kgm36" name="GameUI.xml" path="/GameUI/" exported="true"/>
-    <component id="kgm37" name="Btn_back.xml" path="/GameUI/"/>
+    <component id="kgm37" name="Btn_back.xml" path="/Common/"/>
     <component id="kgm38" name="Btn_complaint.xml" path="/GameUI/"/>
     <component id="kgm39" name="Btn_replay.xml" path="/GameUI/"/>
     <component id="kgm3a" name="Btn_dollar_tip.xml" path="/GameUI/"/>
@@ -31,6 +31,27 @@
     <component id="szo015" name="Btn_fuli.xml" path="/HomeUI/"/>
     <component id="szo016" name="Btn_sound.xml" path="/HomeUI/"/>
     <component id="szo017" name="Btn_friend.xml" path="/HomeUI/"/>
+    <image id="j3ej19" name="redBag_min.png" path="/Common/"/>
+    <component id="j3ej1a" name="RedBagTip.xml" path="/Common/"/>
+    <image id="j3ej1b" name="redBagTipBg.png" path="/Common/"/>
+    <image id="j3ej1c" name="redBag_big.png" path="/HomeUI/"/>
+    <component id="j3ej1d" name="Btn_redBag.xml" path="/HomeUI/"/>
+    <image id="j3ej1e" name="redBag_1.png" path="/RedBag/"/>
+    <component id="j3ej1g" name="RedBag.xml" path="/RedBag/" exported="true"/>
+    <image id="j3ej1h" name="redBag_2.png" path="/RedBag/"/>
+    <image id="j3ej1i" name="white.png" path="/Common/"/>
+    <component id="j3ej1j" name="RedBagBadge.xml" path="/RedBag/"/>
+    <image id="j3ej1k" name="redBag_3.png" path="/RedBag/"/>
+    <component id="j3ej1m" name="RedBagEveryDay.xml" path="/RedBag/"/>
+    <component id="j3ej1n" name="RedBagInvitation.xml" path="/RedBag/"/>
+    <image id="j3ej1o" name="redBag_4.png" path="/RedBag/"/>
+    <component id="j3ej1p" name="SuccessUI.xml" path="/Success/" exported="true"/>
+    <image id="j3ej1q" name="guoGuan.png" path="/Success/"/>
+    <image id="j3ej1r" name="jiangBei.png" path="/Success/"/>
+    <image id="j3ej1s" name="mianFeiJinBi.png" path="/Success/"/>
+    <image id="j3ej1t" name="xiaYiGuan.png" path="/Success/"/>
+    <component id="j3ej1u" name="Btn_nextLevel.xml" path="/Success/"/>
+    <component id="j3ej1v" name="Btn_freeDollar.xml" path="/Success/"/>
   </resources>
-  <publish name="Package1" path="/Users/zhouhongjie/Documents/egret/OneStroke/resource/assets"/>
+  <publish name="Package1" path="/Users/eddie104/Documents/hongjie/OneStroke-egret/resource/assets"/>
 </packageDescription>

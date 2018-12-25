@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="103,118">
+  <displayList>
+    <image id="n1_j3ej" name="n1" src="j3ej1o" fileName="RedBag/redBag_4.png" xy="0,0"/>
+    <text id="n2_j3ej" name="n2" xy="16,90" size="85,28" skew="-24,-24" fontSize="20" color="#cbcfd1" align="center" vAlign="middle" bold="true" text="邀请红包"/>
+  </displayList>
+</component>
