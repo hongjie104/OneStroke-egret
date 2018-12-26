@@ -118,6 +118,7 @@ class Main extends egret.DisplayObjectContainer {
         this.showHomeScene();
 
         SuccessPanel.instance.addEventListener(GameEvent.GO_TO_HOME, this.showHomeScene, this);
+        UnlockPanel.instance.addEventListener(GameEvent.GO_TO_HOME, this.showHomeScene, this);
     }
 
     private showHomeScene() {

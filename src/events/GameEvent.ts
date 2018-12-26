@@ -6,6 +6,12 @@ class GameEvent extends egret.Event {
 
     public static NEXT_LEVEL: string = 'nextLevel';
 
+    public static GET_AWARD: string = 'getAward';
+
+    public static UNLOCK: string = 'unlockLevel';
+
+    public static GET_MONEY: string = 'getMoney';
+
     constructor(type: string) {
         super(type);
     }
