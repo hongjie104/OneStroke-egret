@@ -20,6 +20,7 @@ class Panel extends egret.EventDispatcher {
         if (!this._isShowing) {
             this._isShowing = true;
             fairygui.GRoot.inst.addChild(this._ui);
+            this.dispatchEvent(new PanelEvent(PanelEvent.SHOW));
         }
     }
 
@@ -30,6 +31,7 @@ class Panel extends egret.EventDispatcher {
         if (this._isShowing) {
             this._isShowing = false;
             fairygui.GRoot.inst.removeChild(this._ui);
+            this.dispatchEvent(new PanelEvent(PanelEvent.CLOSE));
         }
     }
 }

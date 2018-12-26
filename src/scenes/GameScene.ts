@@ -265,8 +265,32 @@ class GameScene extends egret.DisplayObjectContainer {
         const p = SuccessPanel.instance;
         p.show();
         if (!p.hasEventListener(GameEvent.NEXT_LEVEL)) {
-            p.addEventListener(GameEvent.NEXT_LEVEL, this.onNextLevel, this);
+            p.addEventListener(GameEvent.NEXT_LEVEL, this.onShowGetRedBagPanel, this);
         }
+    }
+
+    private onShowGetRedBagPanel() {
+        const redBagPanel = NewRedBagPanel.instance;
+        if (!redBagPanel.hasEventListener(GameEvent.GET_MONEY)) {
+            redBagPanel.addEventListener(GameEvent.GET_MONEY, this.onShowAwardPanel, this);
+        }
+        redBagPanel.show();
+    }
+
+    private onShowAwardPanel() {
+        const awardPanel = AwardPanel.instance;
+        if (!awardPanel.hasEventListener(GameEvent.GET_AWARD)) {
+            awardPanel.addEventListener(GameEvent.GET_AWARD, this.onUnlock, this);
+        }
+        awardPanel.show();
+    }
+
+    private onUnlock() {
+        const unlockPanel = UnlockPanel.instance;
+        if (!unlockPanel.hasEventListener(GameEvent.UNLOCK)) {
+            unlockPanel.addEventListener(GameEvent.UNLOCK, this.onNextLevel, this);
+        }
+        unlockPanel.show();
     }
 
     private onNextLevel() {

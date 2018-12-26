@@ -52,6 +52,18 @@
     <image id="j3ej1t" name="xiaYiGuan.png" path="/Success/"/>
     <component id="j3ej1u" name="Btn_nextLevel.xml" path="/Success/"/>
     <component id="j3ej1v" name="Btn_freeDollar.xml" path="/Success/"/>
+    <image id="v2ee1w" name="arard.png" path="/Award/"/>
+    <image id="v2ee1x" name="btn_award.png" path="/Award/"/>
+    <component id="v2ee1y" name="AwardUI.xml" path="/Award/" exported="true"/>
+    <component id="v2ee1z" name="Btn_award.xml" path="/Award/"/>
+    <image id="s0cr20" name="unlock_1.png" path="/Unlock/"/>
+    <image id="s0cr21" name="unlock_2.png" path="/Unlock/"/>
+    <component id="s0cr22" name="UnlockUI.xml" path="/Unlock/" exported="true"/>
+    <component id="s0cr23" name="Btn_unclock.xml" path="/Unlock/"/>
+    <image id="s0cr24" name="redBag_5.png" path="/RedBag/"/>
+    <component id="s0cr25" name="NewRedBag.xml" path="/RedBag/" exported="true"/>
+    <image id="s0cr28" name="btn_renBag.png" path="/RedBag/"/>
+    <component id="s0cr29" name="Btn_redBag.xml" path="/RedBag/"/>
   </resources>
-  <publish name="Package1" path="/Users/zhouhongjie/Documents/egret/OneStroke/resource/assets"/>
+  <publish name="Package1" path="/Users/eddie104/Documents/hongjie/OneStroke-egret/resource/assets"/>
 </packageDescription>

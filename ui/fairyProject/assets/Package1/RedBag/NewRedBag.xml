@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="640,1136">
+  <displayList>
+    <image id="n0_s0cr" name="n0" src="j3ej1i" fileName="Common/white.png" xy="0,0" size="640,1136"/>
+    <image id="n1_s0cr" name="n1" src="s0cr24" fileName="RedBag/redBag_5.png" xy="137,220">
+      <relation target="" sidePair="center-center,top-top"/>
+    </image>
+    <component id="n3_s0cr" name="n3" src="s0cr29" fileName="RedBag/Btn_redBag.xml" xy="245,444">
+      <relation target="n1_s0cr" sidePair="left-left,top-top"/>
+    </component>
+    <text id="n4_s0cr" name="n4" xy="246,618" size="146,37" fontSize="20" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="余额：36.30元">
+      <relation target="n1_s0cr" sidePair="left-left,top-top"/>
+    </text>
+  </displayList>
+</component>

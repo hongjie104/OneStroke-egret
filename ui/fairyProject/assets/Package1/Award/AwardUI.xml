@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="640,1136">
+  <displayList>
+    <image id="n0_v2ee" name="n0" src="j3ej1i" fileName="Common/white.png" xy="0,0" size="640,1136"/>
+    <component id="n1_v2ee" name="n1" src="kgm37" fileName="Common/Btn_back.xml" xy="52,160">
+      <relation target="" sidePair="left-left,top-top"/>
+    </component>
+    <component id="n2_v2ee" name="n2" src="kgm3d" fileName="GameUI/DollarLabel.xml" xy="244,169">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
+    <image id="n3_v2ee" name="n3" src="v2ee1w" fileName="Award/arard.png" xy="154,320">
+      <relation target="" sidePair="center-center,top-top"/>
+    </image>
+    <component id="n4_v2ee" name="n4" src="v2ee1z" fileName="Award/Btn_award.xml" xy="191,696">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
+  </displayList>
+</component>

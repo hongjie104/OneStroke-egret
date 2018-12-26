@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="640,1136">
+  <displayList>
+    <image id="n0_s0cr" name="n0" src="j3ej1i" fileName="Common/white.png" xy="0,0" size="640,1136"/>
+    <component id="n1_s0cr" name="n1" src="kgm37" fileName="Common/Btn_back.xml" xy="52,160"/>
+    <component id="n2_s0cr" name="n2" src="kgm3d" fileName="GameUI/DollarLabel.xml" xy="244,169">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
+    <text id="n3_s0cr" name="n3" xy="152,320" size="335,38" fontSize="30" color="#ff6666" singleLine="true" text="恭喜通关，解锁新的关卡">
+      <relation target="" sidePair="center-center,top-top"/>
+    </text>
+    <image id="n4_s0cr" name="n4" src="s0cr20" fileName="Unlock/unlock_1.png" xy="224,392">
+      <relation target="" sidePair="center-center,top-top"/>
+    </image>
+    <component id="n5_s0cr" name="n5" src="s0cr23" fileName="Unlock/Btn_unclock.xml" xy="191,669">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
+  </displayList>
+</component>
