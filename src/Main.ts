@@ -75,8 +75,33 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private async runGame() {
-        await this.loadResource()
+        await this.login();
+        await this.initWeChat();
+        await this.loadResource();
         this.createGameScene();
+    }
+
+    private async login() {
+        // 获取微信code值
+        const wxCode = utils.locationUtil.getParamValue('code');
+        try {
+            const result = await Service.login(wxCode);
+            console.log('登录服务器收到的数据:');
+            console.log(result);
+        } catch (error) {
+            console.error('登录失败', error);
+        }
+    }
+
+    private async initWeChat() {
+        try {
+            const url = location.href.split('#')[0];
+            const result = await Service.sing(url)
+            const { data: { noncestr, signature, timestamp } } = result;
+            await utils.wechat.init(noncestr, timestamp, signature);
+        } catch (error) {
+            console.error('初始化微信sdk失败');
+        }
     }
 
     private async loadResource() {

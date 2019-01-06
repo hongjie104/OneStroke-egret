@@ -1,7 +1,7 @@
 {
 	"groups":[
 	{
-		"keys":"bg_jpg,egret_icon_png,level_json,redBag_json,ui_bin,ui_bin_atlas0",
+		"keys":"bg_jpg,egret_icon_png,level_json,redBag_json,game_json,ui_bin,ui_bin_atlas0",
 		"name":"preload"
 	}],
 	"resources":[
@@ -24,6 +24,11 @@
 		"name": "redBag_json",
 		"type": "json",
 		"url": "config/redBag.json"
+	},
+	{
+		"name": "game_json",
+		"type": "json",
+		"url": "config/game.json"
 	},
 	{
 		"name": "ui_bin",

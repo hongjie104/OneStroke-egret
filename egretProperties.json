@@ -24,6 +24,10 @@
     {
       "name": "fairygui",
       "path": "./libs/fairygui"
+    },
+    {
+      "name": "weixinapi",
+      "path": "./libs/weixinapi"
     }
   ]
 }
