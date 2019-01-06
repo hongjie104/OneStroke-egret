@@ -23,5 +23,6 @@
     <component id="n12_j3ej" name="n12" src="j3ej1d" fileName="HomeUI/Btn_redBag.xml" xy="464,107">
       <relation target="n11_j3ej" sidePair="left-right,bottom-bottom"/>
     </component>
+    <component id="n13_qw07" name="n13" src="j3ej1a" fileName="Common/RedBagTip.xml" xy="169,180"/>
   </displayList>
 </component>

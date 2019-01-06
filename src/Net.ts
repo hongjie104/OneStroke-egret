@@ -11,6 +11,10 @@ class Net {
             const request = new egret.HttpRequest();
             request.responseType = egret.HttpResponseType.TEXT;
             request.setRequestHeader("Content-Type", "application/json");
+            const uid = LocalStorage.getItem(LocalStorageKey.uid);
+            if (uid) {
+                request.setRequestHeader('token', uid);
+            }
             request.once(egret.Event.COMPLETE, () => {
                 resolve(JSON.parse(request.response));
             }, this);
@@ -27,6 +31,10 @@ class Net {
             const request = new egret.HttpRequest();
             request.responseType = egret.HttpResponseType.TEXT;
             request.setRequestHeader("Content-Type", "application/json");
+            const uid = LocalStorage.getItem(LocalStorageKey.uid);
+            if (uid) {
+                request.setRequestHeader('token', uid);
+            }
             request.once(egret.Event.COMPLETE, () => {
                 resolve(JSON.parse(request.response));
             }, this);

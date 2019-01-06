@@ -27,11 +27,17 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
+interface ILEVEL {
+    index: number;
+    redBag: Array<number>;
+    map: Array<Array<number>>;
+}
+
 class Main extends egret.DisplayObjectContainer {
 
     private _gameContainer: egret.DisplayObjectContainer;
 
-    private _levelJson: Array<Array<Array<number>>>;
+    private _levelJson: Array<ILEVEL>;
 
     private _redBagJson: { name: Array<string>, money: Array<number> };
 
@@ -75,6 +81,7 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private async runGame() {
+        LocalStorage.init();
         await this.login();
         await this.initWeChat();
         await this.loadResource();
@@ -88,6 +95,10 @@ class Main extends egret.DisplayObjectContainer {
             const result = await Service.login(wxCode);
             console.log('登录服务器收到的数据:');
             console.log(result);
+            const { id, money, curLevel } = result.data;
+            LocalStorage.setItem(LocalStorageKey.uid, id);
+            LocalStorage.setItem(LocalStorageKey.money, money);
+            LocalStorage.setItem(LocalStorageKey.curLevel, curLevel);
         } catch (error) {
             console.error('登录失败', error);
         }
@@ -124,7 +135,6 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene() {
-        LocalStorage.init();
         // 初始化UI
         const ui = UI.instance;
         ui.stageWidth = this.stage.stageWidth;
