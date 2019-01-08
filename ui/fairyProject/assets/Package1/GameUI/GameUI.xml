@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="640,1136" overflow="hidden" opaque="false">
   <displayList>
-    <component id="n2_kgm3" name="n2" src="kgm38" fileName="GameUI/Btn_complaint.xml" xy="81,988" group="n6_kgm3"/>
-    <component id="n3_kgm3" name="n3" src="kgm39" fileName="GameUI/Btn_replay.xml" xy="214,988" group="n6_kgm3"/>
-    <component id="n4_kgm3" name="n4" src="kgm3a" fileName="GameUI/Btn_dollar_tip.xml" xy="347,988" group="n6_kgm3"/>
-    <component id="n5_kgm3" name="n5" src="kgm3b" fileName="GameUI/Btn_free_tip.xml" xy="480,988" group="n6_kgm3"/>
-    <group id="n6_kgm3" name="n6" xy="81,988" size="472,73" advanced="true" layout="hz" colGap="60">
+    <component id="n3_kgm3" name="n3" src="kgm39" fileName="GameUI/Btn_replay.xml" xy="157,988" size="73,73" group="n6_kgm3"/>
+    <component id="n5_kgm3" name="n5" src="kgm3b" fileName="GameUI/Btn_free_tip.xml" xy="410,988" size="73,73" group="n6_kgm3"/>
+    <group id="n6_kgm3" name="n6" xy="157,988" size="326,73" advanced="true" layout="hz" colGap="180">
       <relation target="" sidePair="center-center"/>
     </group>
     <component id="n1_kgm3" name="n1" src="kgm37" fileName="Common/Btn_back.xml" xy="20,50">
       <relation target="" sidePair="top-top,left-left"/>
     </component>
-    <component id="n7_kgm3" name="n7" src="kgm3d" fileName="GameUI/DollarLabel.xml" xy="256,57">
-      <relation target="" sidePair="center-center,top-top"/>
-    </component>
-    <text id="n9_j3ej" name="n9" xy="288,103" size="64,36" fontSize="28" color="#7a7a7a" vAlign="middle" text="36关">
+    <text id="n9_j3ej" name="n9" xy="260,50" size="120,52" fontSize="36" color="#57b0ee" align="center" vAlign="middle" autoSize="none" text="36关">
       <relation target="" sidePair="center-center,top-top"/>
     </text>
-    <richtext id="n11_j3ej" name="n11" xy="184,148" size="271,31" fontSize="24" color="#7a7a7a" vAlign="middle" text="下次红包将在&lt;font color=&quot;#ff0000&quot;>10&lt;/font>关后出现">
-      <relation target="" sidePair="center-center,top-top"/>
-    </richtext>
-    <component id="n12_j3ej" name="n12" src="j3ej1d" fileName="HomeUI/Btn_redBag.xml" xy="464,107">
-      <relation target="n11_j3ej" sidePair="left-right,bottom-bottom"/>
+    <component id="n12_j3ej" name="n12" src="j3ej1d" fileName="HomeUI/Btn_redBag.xml" xy="435,40">
+      <relation target="" sidePair="right-right,top-top"/>
     </component>
-    <component id="n13_qw07" name="n13" src="j3ej1a" fileName="Common/RedBagTip.xml" xy="169,180"/>
+    <component id="n13_qw07" name="n13" src="j3ej1a" fileName="Common/RedBagTip.xml" xy="169,180">
+      <relation target="" sidePair="top-top,center-center"/>
+    </component>
   </displayList>
 </component>

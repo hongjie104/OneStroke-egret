@@ -2,7 +2,7 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private static GAP  = 12;
 
-    private static CELL_SIZE = 68;
+    private static CELL_SIZE = 74;
 
     private static CELL_ELLIPSE = 16;
 
@@ -30,13 +30,11 @@ class GameScene extends egret.DisplayObjectContainer {
         this.curLevel = LocalStorage.getItem(LocalStorageKey.curLevel);
         this._ui = UI.instance.createPanel('GameUI');
         this._ui.getChild('n1').asButton.addClickListener(this.onBack, this);
-        this._ui.getChild('n2').asButton.addClickListener(this.onComplaint, this);
         this._ui.getChild('n3').asButton.addClickListener(this.onReplay, this);
-        this._ui.getChild('n4').asButton.addClickListener(this.onDollarTip, this);
-        this._ui.getChild('n5').asButton.addClickListener(this.onFreeTip, this);
+        this._ui.getChild('n5').asButton.addClickListener(this.onDollarTip, this);
 
         // 金币数量
-        this._ui.getChild('n7').asCom.getChild('n1').asTextField.text = '30';
+        // this._ui.getChild('n7').asCom.getChild('n1').asTextField.text = '30';
 
         this._ui.getChild('n12').asButton.addClickListener(this.onShowRedBagPanel, this);
 
@@ -397,16 +395,23 @@ class GameScene extends egret.DisplayObjectContainer {
         this.dispatchEvent(new GameEvent(GameEvent.GO_TO_HOME));
     }
 
-    private onComplaint() {
-        console.log('onComplaint');
-    }
-
     private onReplay() {
         this.selectedRowAndCol.length = 1;
         this.drawSelectedCell();
     }
 
     private onDollarTip() {
+        Alert.instance.once(GameEvent.PAY_SUCCESS, this.onPaySuccess, this);
+        Alert.instance.show({
+            title: '获取提示',
+            content: '支付1元,获取过关提示',
+            btnContent: '去支付',
+            eventAfterClose: GameEvent.PAY_SUCCESS,
+        });
+    }
+
+    // 支付成功
+    private onPaySuccess() {
         const path = utils.oneStroke.getPath(this._levelJson[this.curLevel - 1].map);
         // console.log(path);
         let lastP: utils.oneStroke.Point = null;
@@ -447,15 +452,6 @@ class GameScene extends egret.DisplayObjectContainer {
             );
         }
         g.endFill();
-
-
-        // g.drawRoundRect(
-        //     minCol * (cellSize + gap),
-        //     minRow * (cellSize + gap),
-        //     (maxCol - minCol) * gap + (maxCol - minCol + 1) * cellSize,
-        //     (maxRow - minRow) * gap + (maxRow - minRow + 1) * cellSize,
-        //     GameScene.CELL_ELLIPSE,
-        // );
     }
 
     private showRedTip() {
@@ -477,9 +473,5 @@ class GameScene extends egret.DisplayObjectContainer {
                     this._timer.start();
                 }, this);
         }
-    }
-
-    private onFreeTip() {
-        console.log('onFreeTip');
     }
 }

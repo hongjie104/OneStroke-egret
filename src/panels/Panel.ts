@@ -18,7 +18,7 @@ class Panel extends egret.EventDispatcher {
     /**
      * show
      */
-    public show() {
+    public show(param?:any) {
         if (!this._isShowing) {
             this._isShowing = true;
             this.beforeShow();

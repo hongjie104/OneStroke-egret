@@ -16,7 +16,7 @@ class HomeScene extends egret.DisplayObjectContainer {
             uid = utils.UUID.create(10, 10);
             LocalStorage.setItem(LocalStorageKey.uid, uid);
         }
-        this._ui.getChild('n11').asTextField.text = `UID: ${uid}`;
+        // this._ui.getChild('n11').asTextField.text = `UID: ${uid}`;
         this._redBagTip = this._ui.getChild('n14').asCom;
 
         // 红包按钮
