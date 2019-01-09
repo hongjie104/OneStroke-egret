@@ -95,10 +95,11 @@ class Main extends egret.DisplayObjectContainer {
             const result = await Service.login(wxCode);
             console.log('登录服务器收到的数据:');
             console.log(result);
-            const { id, money, curLevel } = result.data;
+            const { id, money, curLevel, leftReplayCount } = result.data;
             LocalStorage.setItem(LocalStorageKey.uid, id);
             LocalStorage.setItem(LocalStorageKey.money, money);
             LocalStorage.setItem(LocalStorageKey.curLevel, curLevel);
+            LocalStorage.setItem(LocalStorageKey.leftReplayCount, leftReplayCount);
         } catch (error) {
             console.error('登录失败', error);
         }

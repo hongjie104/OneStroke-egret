@@ -7,16 +7,20 @@ module utils.wechat {
             bodyConfig.timestamp = timestamp;
             bodyConfig.signature = signature;
             bodyConfig.jsApiList = [
-                'updateAppMessageShareData',
-                'updateTimelineShareData',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
                 'getNetworkType',
             ];
-            bodyConfig.debug = true;
-            /// ... 其他的配置属性赋值
-            /// 通过config接口注入权限验证配置
+            bodyConfig.debug = false;
+            // 通过config接口注入权限验证配置
             if (wx) {
                 wx.config(bodyConfig);
                 wx.ready(() => {
+                    const bodyMenuShareAppMessage = new BodyMenuShareAppMessage();
+                    bodyMenuShareAppMessage.title = 'this is title';
+                    bodyMenuShareAppMessage.desc = 'this is desc';
+                    // bodyMenuShareAppMessage.imgUrl =
+                    wx.onMenuShareAppMessage(bodyMenuShareAppMessage)
                     resolve();
                 });
                 wx.error(() => {

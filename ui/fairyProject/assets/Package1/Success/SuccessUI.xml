@@ -11,20 +11,16 @@
     <image id="n3_j3ej" name="n3" src="j3ej1r" fileName="Success/jiangBei.png" xy="249,281" pivot="0.5,0.5">
       <relation target="" sidePair="center-center,top-top"/>
     </image>
-    <component id="n4_j3ej" name="n4" src="j3ej1u" fileName="Success/Btn_nextLevel.xml" xy="90,582" group="n6_dc9j"/>
-    <component id="n5_dc9j" name="n5" src="j3ej1v" fileName="Success/Btn_freeDollar.xml" xy="385,582" group="n6_dc9j"/>
-    <group id="n6_dc9j" name="n6" xy="90,582" size="458,66" advanced="true" layout="hz" colGap="120">
-      <relation target="" sidePair="center-center"/>
-    </group>
+    <component id="n4_j3ej" name="n4" src="j3ej1u" fileName="Success/Btn_nextLevel.xml" xy="232,582">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
   </displayList>
   <transition name="t0" autoPlay="true">
     <item time="0" type="Scale" target="n2_j3ej" tween="true" startValue="0.2,0.2" endValue="1.2,1.2" duration="6"/>
     <item time="0" type="Scale" target="n3_j3ej" tween="true" startValue="0.2,0.2" endValue="1.2,1.2" duration="6"/>
     <item time="0" type="Scale" target="n4_j3ej" tween="true" startValue="0.2,0.2" endValue="1.2,1.2" duration="6"/>
-    <item time="0" type="Scale" target="n5_dc9j" tween="true" startValue="0.2,0.2" endValue="1.2,1.2" duration="6"/>
     <item time="6" type="Scale" target="n2_j3ej" tween="true" startValue="1.2,1.2" endValue="1,1" duration="6"/>
     <item time="6" type="Scale" target="n3_j3ej" tween="true" startValue="1.2,1.2" endValue="1,1" duration="6"/>
     <item time="6" type="Scale" target="n4_j3ej" tween="true" startValue="1.2,1.2" endValue="1,1" duration="6"/>
-    <item time="6" type="Scale" target="n5_dc9j" tween="true" startValue="1.2,1.2" endValue="1,1" duration="6"/>
   </transition>
 </component>

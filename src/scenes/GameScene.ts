@@ -33,6 +33,9 @@ class GameScene extends egret.DisplayObjectContainer {
         this._ui.getChild('n3').asButton.addClickListener(this.onReplay, this);
         this._ui.getChild('n5').asButton.addClickListener(this.onDollarTip, this);
 
+        // 重玩次数
+        this.updateLeftReplayCount();
+
         // 金币数量
         // this._ui.getChild('n7').asCom.getChild('n1').asTextField.text = '30';
 
@@ -46,6 +49,11 @@ class GameScene extends egret.DisplayObjectContainer {
         // 开始一个定时器，显示提现红包的数据
         this._timer = new egret.Timer(utils.MathUtils.getRandom(5000, 10000));
         this._timer.addEventListener(egret.TimerEvent.TIMER, this.showRedTip, this);
+    }
+
+    private updateLeftReplayCount() {
+        const leftReplayCount = LocalStorage.getItem(LocalStorageKey.leftReplayCount);
+        this._ui.getChild('n3').asCom.getChild('n3').text = `(${leftReplayCount}次机会)`;
     }
 
     private onAddToStage() {
@@ -351,9 +359,9 @@ class GameScene extends egret.DisplayObjectContainer {
         for (let index = 0; index < l; index++) {
             if (this.selectedRowAndCol[index].row === row) {
                 if (this.selectedRowAndCol[index].col === col) {
-                    this.selectedRowAndCol.splice(index, l - index);
-                    this.selectedRowAndCol.push({ row, col });
-                    this.drawSelectedCell();
+                    // this.selectedRowAndCol.splice(index, l - index);
+                    // this.selectedRowAndCol.push({ row, col });
+                    // this.drawSelectedCell();
                     return;
                 }
             }
@@ -396,6 +404,30 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private onReplay() {
+        Service.tryReplay().then(({ data }) => {
+            if (data) {
+                this.doReplay();
+            } else {
+                // 次数不够
+                Alert.instance.once(GameEvent.PAY_SUCCESS, this.doReplay, this);
+                Alert.instance.show({
+                    title: '获取提示',
+                    content: '支付1元,获取重玩机会',
+                    btnContent: '去支付',
+                    eventAfterClose: GameEvent.PAY_SUCCESS,
+                });
+            }
+        }).catch(err => {
+            // ...
+        });
+    }
+
+    private doReplay() {
+        let leftReplayCount = parseInt(LocalStorage.getItem(LocalStorageKey.leftReplayCount));
+        if (leftReplayCount > 0) {
+            LocalStorage.setItem(LocalStorageKey.leftReplayCount, leftReplayCount - 1);
+            this.updateLeftReplayCount();
+        }
         this.selectedRowAndCol.length = 1;
         this.drawSelectedCell();
     }

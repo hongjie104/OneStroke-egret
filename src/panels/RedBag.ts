@@ -11,7 +11,7 @@ class RedBag extends Panel {
         this._ui.getChild('n3').addClickListener(this.close, this);
         // this._ui.getChild('n9').text = '余额 ￥3.6元';
         // 还剩多少关有红包
-        this._ui.getChild('n8').asCom.getChild('n1').text = '8';
+        // this._ui.getChild('n8').asCom.getChild('n1').text = '8';
     }
 
     protected beforeShow() {

@@ -1,7 +1,7 @@
 class RedBagAward extends Panel {
 
     private static _instance: RedBagAward;
-    
+
     private _curMoneyAward: number = 0;
 
     constructor() {

@@ -22,6 +22,9 @@ class HomeScene extends egret.DisplayObjectContainer {
         // 红包按钮
         this._ui.getChild('n15').addClickListener(this.onShowRedBagPanel, this);
 
+        // 分享按钮
+        this._ui.getChild('n8').addClickListener(this.onShare2Friend, this);
+
         // 开始一个定时器，显示提现红包的数据
         this._timer = new egret.Timer(utils.MathUtils.getRandom(5000, 10000));
         this._timer.addEventListener(egret.TimerEvent.TIMER, this.showRedTip, this);
@@ -47,6 +50,10 @@ class HomeScene extends egret.DisplayObjectContainer {
 
     private onShowRedBagPanel() {
         RedBag.instance.show();
+    }
+
+    private onShare2Friend() {
+        // ...
     }
 
     private showRedTip() {
