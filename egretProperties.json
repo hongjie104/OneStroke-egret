@@ -24,6 +24,10 @@
     {
       "name": "fairygui",
       "path": "./libs/fairygui"
+    },
+    {
+      "name": "particle",
+      "path": "./libs/particle"
     }
   ]
 }
