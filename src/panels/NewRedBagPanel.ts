@@ -8,7 +8,12 @@ class NewRedBagPanel extends Panel {
     protected init() {
         this._ui = UI.instance.createPanel('NewRedBag');
         this._ui.getChild('n3').addClickListener(this.onGetMoney, this);
-        this._ui.getChild('n4').text = '余额：99.99元';
+        // this._ui.getChild('n4').text = '余额：99.99元';
+    }
+
+    protected beforeShow() {
+        const money = LocalStorage.getItem(LocalStorageKey.money);
+        this._ui.getChild('n4').text = `余额：￥${money.toFixed(2)}元`;
     }
 
     private onGetMoney() {

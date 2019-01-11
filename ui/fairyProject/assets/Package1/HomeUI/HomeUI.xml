@@ -4,25 +4,17 @@
     <image id="n0_szo0" name="n0" src="szo010" fileName="HomeUI/title.png" xy="149,143">
       <relation target="" sidePair="top-top,center-center"/>
     </image>
-    <component id="n1_szo0" name="n1" src="szo011" fileName="HomeUI/Btn_startGame.xml" xy="154,500" group="n4_szo0"/>
-    <component id="n2_szo0" name="n2" src="szo012" fileName="HomeUI/Btn_startGame1.xml" xy="213,630" group="n4_szo0"/>
-    <component id="n3_szo0" name="n3" src="szo013" fileName="HomeUI/Btn_level.xml" xy="213,736" group="n4_szo0"/>
-    <group id="n4_szo0" name="n4" xy="154,500" size="331,302" advanced="true" layout="vt" lineGap="40">
+    <component id="n1_szo0" name="n1" src="szo011" fileName="HomeUI/Btn_startGame.xml" xy="154,447">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
+    <component id="n7_szo0" name="n7" src="szo016" fileName="HomeUI/Btn_sound.xml" xy="132,750" group="n10_szo0"/>
+    <component id="n8_szo0" name="n8" src="szo017" fileName="HomeUI/Btn_friend.xml" xy="430,750" group="n10_szo0"/>
+    <group id="n10_szo0" name="n10" xy="132,750" size="376,78" advanced="true" layout="hz" colGap="220">
       <relation target="" sidePair="bottom-bottom,center-center"/>
     </group>
-    <component id="n5_szo0" name="n5" src="szo014" fileName="HomeUI/Btn_rank.xml" xy="80,900" group="n10_szo0"/>
-    <component id="n6_szo0" name="n6" src="szo015" fileName="HomeUI/Btn_fuli.xml" xy="214,900" group="n10_szo0"/>
-    <component id="n7_szo0" name="n7" src="szo016" fileName="HomeUI/Btn_sound.xml" xy="348,900" group="n10_szo0"/>
-    <component id="n8_szo0" name="n8" src="szo017" fileName="HomeUI/Btn_friend.xml" xy="482,900" group="n10_szo0"/>
-    <group id="n10_szo0" name="n10" xy="80,900" size="480,78" advanced="true" layout="hz" colGap="56">
-      <relation target="" sidePair="bottom-bottom,center-center"/>
-    </group>
-    <text id="n11_szo0" name="n11" xy="244,1040" size="150,28" fontSize="20" color="#8c8c8c" text="UID: 999999999">
-      <relation target="" sidePair="center-center,bottom-bottom"/>
-    </text>
     <component id="n14_j3ej" name="n14" src="j3ej1a" fileName="Common/RedBagTip.xml" xy="157,123"/>
-    <component id="n15_j3ej" name="n15" src="j3ej1d" fileName="HomeUI/Btn_redBag.xml" xy="530,680">
-      <relation target="" sidePair="right-right,bottom-bottom"/>
+    <component id="n15_j3ej" name="n15" src="j3ej1d" fileName="HomeUI/Btn_redBag.xml" xy="521,455">
+      <relation target="n1_szo0" sidePair="left-left,top-top"/>
     </component>
   </displayList>
 </component>

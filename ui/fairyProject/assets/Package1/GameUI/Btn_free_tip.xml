@@ -11,7 +11,7 @@
       <relation target="" sidePair="width-width,height-height"/>
     </image>
     <component id="n2_kgm3" name="n2" src="kgm3c" fileName="GameUI/Label.xml" xy="-23,82" size="120,41">
-      <Label title="免费提示" titleColor="#7d4ed7" titleFontSize="28"/>
+      <Label title="获取提示" titleColor="#7d4ed7" titleFontSize="28"/>
     </component>
   </displayList>
   <Button downEffect="scale" downEffectValue="0.80"/>

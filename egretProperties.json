@@ -26,8 +26,8 @@
       "path": "./libs/fairygui"
     },
     {
-      "name": "particle",
-      "path": "./libs/particle"
+      "name": "weixinapi",
+      "path": "./libs/weixinapi"
     }
   ]
 }

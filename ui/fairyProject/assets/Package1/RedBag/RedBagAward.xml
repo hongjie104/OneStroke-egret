@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="640,1136">
+  <displayList>
+    <image id="n0_j9tq" name="n0" src="j3ej1i" fileName="Common/white.png" xy="0,0" size="640,1136"/>
+    <image id="n1_j9tq" name="n1" src="j9tq2c" fileName="RedBag/redBag_6.png" xy="144,204">
+      <relation target="" sidePair="center-center,top-top"/>
+    </image>
+    <text id="n3_j9tq" name="n3" xy="145,404" size="352,36" fontSize="32" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="￥0.1元">
+      <relation target="n1_j9tq" sidePair="center-center,top-top"/>
+    </text>
+    <text id="n4_j9tq" name="n4" xy="245,474" size="149,40" fontSize="20" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="余额￥5.7元">
+      <relation target="n1_j9tq" sidePair="center-center,top-top"/>
+    </text>
+    <text id="n5_j9tq" name="n5" xy="145,547" size="352,36" fontSize="28" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="满20元可提现">
+      <relation target="n1_j9tq" sidePair="center-center,top-top"/>
+    </text>
+    <component id="n6_qw07" name="n6" src="j9tq2d" fileName="RedBag/btn_goon.xml" xy="191,608">
+      <relation target="n1_j9tq" sidePair="center-center,top-top"/>
+    </component>
+  </displayList>
+</component>

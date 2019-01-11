@@ -7,4 +7,8 @@
     </image>
   </displayList>
   <Button downEffect="scale" downEffectValue="0.80"/>
+  <transition name="t0" autoPlay="true" autoPlayRepeat="-1">
+    <item time="0" type="Scale" target="n0_szo0" tween="true" startValue="1,1" endValue="1.1,1.1" duration="5"/>
+    <item time="5" type="Scale" target="n0_szo0" tween="true" startValue="1.1,1.1" endValue="1,1" duration="5"/>
+  </transition>
 </component>

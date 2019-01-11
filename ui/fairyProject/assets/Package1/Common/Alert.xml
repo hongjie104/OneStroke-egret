@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="640,1136">
+  <displayList>
+    <image id="n0_y8ya" name="n0" src="j3ej1i" fileName="Common/white.png" xy="0,0" size="640,1136"/>
+    <component id="n1_y8ya" name="n1" src="y8ya2i" fileName="Common/Panel.xml" xy="93,0">
+      <relation target="" sidePair="center-center,top-top"/>
+    </component>
+  </displayList>
+  <transition name="t0" autoPlay="true">
+    <item time="0" type="XY" target="n1_y8ya" tween="true" startValue="93,-613" endValue="93,0" duration="8"/>
+    <item time="8" type="XY" target="n1_y8ya" tween="true" startValue="93,0" endValue="93,-20" duration="7"/>
+  </transition>
+</component>

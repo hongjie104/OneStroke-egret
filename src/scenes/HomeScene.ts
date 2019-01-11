@@ -11,16 +11,19 @@ class HomeScene extends egret.DisplayObjectContainer {
         this._ui = UI.instance.createPanel('HomeUI');
         this._ui.getChild('n1').addClickListener(this.onStartGame, this);
 
-        let account: string = LocalStorage.getItem(LocalStorageKey.account);
-        if (!account) {
-            account = utils.UUID.create(10, 10);
-            LocalStorage.setItem(LocalStorageKey.account, account);
+        let uid: string = LocalStorage.getItem(LocalStorageKey.uid);
+        if (!uid) {
+            uid = utils.UUID.create(10, 10);
+            LocalStorage.setItem(LocalStorageKey.uid, uid);
         }
-        this._ui.getChild('n11').asTextField.text = `UID: ${account}`;
+        // this._ui.getChild('n11').asTextField.text = `UID: ${uid}`;
         this._redBagTip = this._ui.getChild('n14').asCom;
 
         // 红包按钮
         this._ui.getChild('n15').addClickListener(this.onShowRedBagPanel, this);
+
+        // 分享按钮
+        this._ui.getChild('n8').addClickListener(this.onShare2Friend, this);
 
         // 开始一个定时器，显示提现红包的数据
         this._timer = new egret.Timer(utils.MathUtils.getRandom(5000, 10000));
@@ -47,6 +50,10 @@ class HomeScene extends egret.DisplayObjectContainer {
 
     private onShowRedBagPanel() {
         RedBag.instance.show();
+    }
+
+    private onShare2Friend() {
+        // ...
     }
 
     private showRedTip() {

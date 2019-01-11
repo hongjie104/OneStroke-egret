@@ -13,12 +13,15 @@ class Panel extends egret.EventDispatcher {
         this._ui = UI.instance.createPanel('RedBag');
     }
 
+    protected beforeShow() { }
+
     /**
      * show
      */
-    public show() {
+    public show(param?:any) {
         if (!this._isShowing) {
             this._isShowing = true;
+            this.beforeShow();
             fairygui.GRoot.inst.addChild(this._ui);
             this.dispatchEvent(new PanelEvent(PanelEvent.SHOW));
         }

@@ -27,11 +27,17 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
+interface ILEVEL {
+    index: number;
+    redBag: Array<number>;
+    map: Array<Array<number>>;
+}
+
 class Main extends egret.DisplayObjectContainer {
 
     private _gameContainer: egret.DisplayObjectContainer;
 
-    private _levelJson: Array<Array<Array<number>>>;
+    private _levelJson: Array<ILEVEL>;
 
     private _redBagJson: { name: Array<string>, money: Array<number> };
 
@@ -75,8 +81,39 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private async runGame() {
-        await this.loadResource()
+        LocalStorage.init();
+        await this.login();
+        await this.initWeChat();
+        await this.loadResource();
         this.createGameScene();
+    }
+
+    private async login() {
+        // 获取微信code值
+        const wxCode = utils.locationUtil.getParamValue('code');
+        try {
+            const result = await Service.login(wxCode);
+            console.log('登录服务器收到的数据:');
+            console.log(result);
+            const { id, money, curLevel, leftReplayCount } = result.data;
+            LocalStorage.setItem(LocalStorageKey.uid, id);
+            LocalStorage.setItem(LocalStorageKey.money, money);
+            LocalStorage.setItem(LocalStorageKey.curLevel, curLevel);
+            LocalStorage.setItem(LocalStorageKey.leftReplayCount, leftReplayCount);
+        } catch (error) {
+            console.error('登录失败', error);
+        }
+    }
+
+    private async initWeChat() {
+        try {
+            const url = location.href.split('#')[0];
+            const result = await Service.sing(url)
+            const { data: { noncestr, signature, timestamp } } = result;
+            await utils.wechat.init(noncestr, timestamp, signature);
+        } catch (error) {
+            console.error('初始化微信sdk失败');
+        }
     }
 
     private async loadResource() {
@@ -99,7 +136,6 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene() {
-        LocalStorage.init();
         // 初始化UI
         const ui = UI.instance;
         ui.stageWidth = this.stage.stageWidth;

@@ -12,6 +12,10 @@ class GameEvent extends egret.Event {
 
     public static GET_MONEY: string = 'getMoney';
 
+    public static GET_MONEY_AWARD: string = 'getMoneyAward';
+
+    public static PAY_SUCCESS: string = 'paySuccess';
+
     constructor(type: string) {
         super(type);
     }

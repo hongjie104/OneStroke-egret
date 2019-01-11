@@ -10,9 +10,10 @@
       <gearDisplay controller="button" pages="1,3"/>
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <component id="n2_kgm3" name="n2" src="kgm3c" fileName="GameUI/Label.xml" xy="-13,82" size="100,41">
+    <component id="n2_kgm3" name="n2" src="kgm3c" fileName="GameUI/Label.xml" xy="-58,82" size="100,41">
       <Label title="重玩" titleColor="#2377c7" titleFontSize="28"/>
     </component>
+    <text id="n3_y8ya" name="n3" xy="29,82" size="89,41" fontSize="20" color="#2377c7" vAlign="middle" autoSize="none" text="(3次机会)"/>
   </displayList>
   <Button downEffect="scale" downEffectValue="0.80"/>
 </component>

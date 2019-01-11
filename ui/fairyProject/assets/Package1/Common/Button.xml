@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="175,66" pivot="0.5,0.5" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_y8ya" name="n0" src="y8ya2e" fileName="Common/btn_10.png" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n1_y8ya" name="n1" xy="0,0" size="175,66" fontSize="30" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="确定">
+      <relation target="" sidePair="left-left,top-top"/>
+    </text>
+  </displayList>
+  <Button downEffect="scale" downEffectValue="0.80"/>
+</component>

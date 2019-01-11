@@ -2,7 +2,7 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private static GAP  = 12;
 
-    private static CELL_SIZE = 68;
+    private static CELL_SIZE = 74;
 
     private static CELL_ELLIPSE = 16;
 
@@ -21,26 +21,49 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private _ui: fairygui.GComponent;
 
-    constructor(private _levelJson: Array<Array<Array<number>>>, private _redBagJson: { name: Array<string>, money: Array<number> }) {
+    private _timer: egret.Timer;
+
+    private _redBagTip: fairygui.GComponent;
+
+    constructor(private _levelJson: Array<ILEVEL>, private _redBagJson: { name: Array<string>, money: Array<number> }) {
         super();
+        this.curLevel = LocalStorage.getItem(LocalStorageKey.curLevel);
         this._ui = UI.instance.createPanel('GameUI');
         this._ui.getChild('n1').asButton.addClickListener(this.onBack, this);
-        this._ui.getChild('n2').asButton.addClickListener(this.onComplaint, this);
         this._ui.getChild('n3').asButton.addClickListener(this.onReplay, this);
-        this._ui.getChild('n4').asButton.addClickListener(this.onDollarTip, this);
-        this._ui.getChild('n5').asButton.addClickListener(this.onFreeTip, this);
+        this._ui.getChild('n5').asButton.addClickListener(this.onDollarTip, this);
+
+        // 重玩次数
+        this.updateLeftReplayCount();
 
         // 金币数量
-        this._ui.getChild('n7').asCom.getChild('n1').asTextField.text = '30';
+        // this._ui.getChild('n7').asCom.getChild('n1').asTextField.text = '30';
 
         this._ui.getChild('n12').asButton.addClickListener(this.onShowRedBagPanel, this);
 
+        this._redBagTip = this._ui.getChild('n13').asCom;
+
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemoveFromStage, this);
+
+        // 开始一个定时器，显示提现红包的数据
+        this._timer = new egret.Timer(utils.MathUtils.getRandom(5000, 10000));
+        this._timer.addEventListener(egret.TimerEvent.TIMER, this.showRedTip, this);
+    }
+
+    private updateLeftReplayCount() {
+        const leftReplayCount = LocalStorage.getItem(LocalStorageKey.leftReplayCount);
+        this._ui.getChild('n3').asCom.getChild('n3').text = `(${leftReplayCount}次机会)`;
     }
 
     private onAddToStage() {
         fairygui.GRoot.inst.addChild(this._ui);
+        if (this.pathShap) {
+            this.pathShap.graphics.clear();
+        }
+        // 先把提示框放在屏幕右边
+        this._redBagTip.x = this.stage.stageWidth;
+        this._timer.start();
         this.drawCell();
     }
 
@@ -53,6 +76,7 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private drawCell() {
+        this._ui.getChild('n9').text = `${this.curLevel}关`;
         this.selectedRowAndCol = new Array<{ row: number, col: number }>();
         if (!this.cellContainer) {
             this.cellContainer = new egret.DisplayObjectContainer();
@@ -68,13 +92,13 @@ class GameScene extends egret.DisplayObjectContainer {
         }
         this.cellArr.length = 0;
 
-        const cellJson: Array<Array<number>> = this._levelJson[this.curLevel - 1];
-        const rows = cellJson.length;
-        const cols = cellJson[0].length;
+        const levelData: ILEVEL = this._levelJson[this.curLevel - 1];
+        const rows = levelData.map.length;
+        const cols = levelData.map[0].length;
         for (let row = 0; row < rows; row++) {
             this.cellArr[row] = new Array<Cell>();
             for (let col = 0; col < cols; col++) {
-                cell = new Cell(row, col, GameScene.CELL_SIZE, GameScene.CELL_ELLIPSE, cellJson[row][col]);
+                cell = new Cell(row, col, GameScene.CELL_SIZE, GameScene.CELL_ELLIPSE, levelData.map[row][col]);
                 cell.x = col * (cell.width + GameScene.GAP);
                 cell.y = row * (cell.height + GameScene.GAP);
                 this.cellContainer.addChild(cell);
@@ -82,7 +106,7 @@ class GameScene extends egret.DisplayObjectContainer {
                 cell.addEventListener(CellEvent.ADD_2_ARR, this.onAddCell2Arr, this);
                 cell.addEventListener(CellEvent.TRY_2_ADD_2_ARR, this.onTry2AddCell2Arr, this);
 
-                if (cellJson[row][col] === 2) {
+                if (levelData.map[row][col] === 2) {
                     // 起点
                     this.selectedRowAndCol.push({ row, col });
                 }
@@ -215,14 +239,14 @@ class GameScene extends egret.DisplayObjectContainer {
         g.endFill();
 
         // 判断是不是成功了
-        const cellJson: Array<Array<number>> = this._levelJson[this.curLevel - 1];
-        const rows = cellJson.length;
-        const cols = cellJson[0].length;
+        const levelData: ILEVEL = this._levelJson[this.curLevel - 1];
+        const rows = levelData.map.length;
+        const cols = levelData.map[0].length;
         let exists: boolean = false;
         let success: boolean = true;
         for (let row = 0; row < rows; row++) {
             for (let col = 0; col < cols; col++) {
-                if (cellJson[row][col] > 0) {
+                if (levelData.map[row][col] > 0) {
                     exists = false;
                     for (let index = 0; index < this.selectedRowAndCol.length; index++) {
                         if (this.selectedRowAndCol[index].row === row) {
@@ -252,7 +276,6 @@ class GameScene extends egret.DisplayObjectContainer {
                 clearTimeout(t);
                 this.selectedCellShape.graphics.clear();
                 for (let index = 0; index < this.cellArr.length; index++) {
-                    const element = this.cellArr[index];
                     for (let j = 0; j < this.cellArr[index].length; j++) {
                         this.cellArr[index][j].startToScale(index === 0 && j === 0 ? this.onCellEndScale : null, this);
                     }
@@ -262,35 +285,64 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private onCellEndScale() {
-        const p = SuccessPanel.instance;
-        p.show();
-        if (!p.hasEventListener(GameEvent.NEXT_LEVEL)) {
-            p.addEventListener(GameEvent.NEXT_LEVEL, this.onShowGetRedBagPanel, this);
-        }
+        Service.passLevel().then(() => {
+            const p = SuccessPanel.instance;
+            p.show();
+            if (!p.hasEventListener(GameEvent.NEXT_LEVEL)) {
+                p.addEventListener(GameEvent.NEXT_LEVEL, this.onShowGetRedBagPanel, this);
+            }
+        }).catch(err => {
+            console.error(err);
+        });
     }
 
     private onShowGetRedBagPanel() {
-        const redBagPanel = NewRedBagPanel.instance;
-        if (!redBagPanel.hasEventListener(GameEvent.GET_MONEY)) {
-            redBagPanel.addEventListener(GameEvent.GET_MONEY, this.onShowAwardPanel, this);
+        // 判断是否有红包
+        const levelData = this._levelJson[this.curLevel - 1];
+        if (Array.isArray(levelData.redBag) && levelData.redBag.length === 2 && levelData.redBag[0] > 0) {
+            const redBagPanel = NewRedBagPanel.instance;
+            if (!redBagPanel.hasEventListener(GameEvent.GET_MONEY)) {
+                redBagPanel.addEventListener(GameEvent.GET_MONEY, this.onShowGetRedBagAwardPanel, this);
+            }
+            redBagPanel.show();
+        } else {
+            // 没有红包，就跳到获得金币的面板
+            this.onShowAwardPanel();
         }
-        redBagPanel.show();
+    }
+
+    private onShowGetRedBagAwardPanel() {
+        const redBagAwardPanel = RedBagAward.instance;
+        if (!redBagAwardPanel.hasEventListener(GameEvent.GET_MONEY_AWARD)) {
+            redBagAwardPanel.addEventListener(GameEvent.GET_MONEY_AWARD, this.onShowAwardPanel, this);
+        }
+        const levelData = this._levelJson[this.curLevel - 1];
+        Service.getRedBag(levelData.redBag[0], levelData.redBag[1]).then(({ data: { money } }) => {
+            const curMoney = LocalStorage.getItem(LocalStorageKey.money);
+            LocalStorage.setItem(LocalStorageKey.money, curMoney + money);
+            redBagAwardPanel.setRedBagAward(money);
+            redBagAwardPanel.show();
+        }).catch(err => {
+            console.error(err);
+        });
     }
 
     private onShowAwardPanel() {
-        const awardPanel = AwardPanel.instance;
-        if (!awardPanel.hasEventListener(GameEvent.GET_AWARD)) {
-            awardPanel.addEventListener(GameEvent.GET_AWARD, this.onUnlock, this);
-        }
-        awardPanel.show();
+        // const awardPanel = AwardPanel.instance;
+        // if (!awardPanel.hasEventListener(GameEvent.GET_AWARD)) {
+        //     awardPanel.addEventListener(GameEvent.GET_AWARD, this.onUnlock, this);
+        // }
+        // awardPanel.show();
+        this.onUnlock();
     }
 
     private onUnlock() {
-        const unlockPanel = UnlockPanel.instance;
-        if (!unlockPanel.hasEventListener(GameEvent.UNLOCK)) {
-            unlockPanel.addEventListener(GameEvent.UNLOCK, this.onNextLevel, this);
-        }
-        unlockPanel.show();
+        // const unlockPanel = UnlockPanel.instance;
+        // if (!unlockPanel.hasEventListener(GameEvent.UNLOCK)) {
+        //     unlockPanel.addEventListener(GameEvent.UNLOCK, this.onNextLevel, this);
+        // }
+        // unlockPanel.show();
+        this.onNextLevel();
     }
 
     private onNextLevel() {
@@ -307,9 +359,9 @@ class GameScene extends egret.DisplayObjectContainer {
         for (let index = 0; index < l; index++) {
             if (this.selectedRowAndCol[index].row === row) {
                 if (this.selectedRowAndCol[index].col === col) {
-                    this.selectedRowAndCol.splice(index, l - index);
-                    this.selectedRowAndCol.push({ row, col });
-                    this.drawSelectedCell();
+                    // this.selectedRowAndCol.splice(index, l - index);
+                    // this.selectedRowAndCol.push({ row, col });
+                    // this.drawSelectedCell();
                     return;
                 }
             }
@@ -351,17 +403,48 @@ class GameScene extends egret.DisplayObjectContainer {
         this.dispatchEvent(new GameEvent(GameEvent.GO_TO_HOME));
     }
 
-    private onComplaint() {
-        console.log('onComplaint');
+    private onReplay() {
+        Service.tryReplay().then(({ data }) => {
+            if (data) {
+                this.doReplay();
+            } else {
+                // 次数不够
+                Alert.instance.once(GameEvent.PAY_SUCCESS, this.doReplay, this);
+                Alert.instance.show({
+                    title: '获取提示',
+                    content: '支付1元,获取重玩机会',
+                    btnContent: '去支付',
+                    eventAfterClose: GameEvent.PAY_SUCCESS,
+                });
+            }
+        }).catch(err => {
+            // ...
+        });
     }
 
-    private onReplay() {
+    private doReplay() {
+        let leftReplayCount = parseInt(LocalStorage.getItem(LocalStorageKey.leftReplayCount));
+        if (leftReplayCount > 0) {
+            LocalStorage.setItem(LocalStorageKey.leftReplayCount, leftReplayCount - 1);
+            this.updateLeftReplayCount();
+        }
         this.selectedRowAndCol.length = 1;
         this.drawSelectedCell();
     }
 
     private onDollarTip() {
-        const path = utils.oneStroke.getPath(this._levelJson[this.curLevel - 1]);
+        Alert.instance.once(GameEvent.PAY_SUCCESS, this.onPaySuccess, this);
+        Alert.instance.show({
+            title: '获取提示',
+            content: '支付1元,获取过关提示',
+            btnContent: '去支付',
+            eventAfterClose: GameEvent.PAY_SUCCESS,
+        });
+    }
+
+    // 支付成功
+    private onPaySuccess() {
+        const path = utils.oneStroke.getPath(this._levelJson[this.curLevel - 1].map);
         // console.log(path);
         let lastP: utils.oneStroke.Point = null;
         let curP: utils.oneStroke.Point = null;
@@ -401,18 +484,26 @@ class GameScene extends egret.DisplayObjectContainer {
             );
         }
         g.endFill();
-
-
-        // g.drawRoundRect(
-        //     minCol * (cellSize + gap),
-        //     minRow * (cellSize + gap),
-        //     (maxCol - minCol) * gap + (maxCol - minCol + 1) * cellSize,
-        //     (maxRow - minRow) * gap + (maxRow - minRow + 1) * cellSize,
-        //     GameScene.CELL_ELLIPSE,
-        // );
     }
 
-    private onFreeTip() {
-        console.log('onFreeTip');
+    private showRedTip() {
+        this._timer.stop();
+        if (this.stage) {
+            const stageWidth: number = this.stage.stageWidth;
+            const nameArr = this._redBagJson.name;
+            const name = nameArr[utils.MathUtils.getRandom(0, nameArr.length - 1)];
+            const moneyArr = this._redBagJson.money;
+            const money = moneyArr[utils.MathUtils.getRandom(0, moneyArr.length - 1)];
+            this._redBagTip.getChild('n1').asRichTextField.text = `恭喜<font color="#f5e20f">${name}</font>成功提现<font color="#f5e20f">${money}</font>元`;
+            egret.Tween.get(this._redBagTip)
+                .to({ x: (stageWidth - this._redBagTip.actualWidth) / 2 }, 1000)
+                .wait(3000)
+                .to({ x: -this._redBagTip.actualWidth }, 1000)
+                .call(() => {
+                    this._redBagTip.x = stageWidth;
+                    this._timer.delay = utils.MathUtils.getRandom(5000, 10000);
+                    this._timer.start();
+                }, this);
+        }
     }
 }

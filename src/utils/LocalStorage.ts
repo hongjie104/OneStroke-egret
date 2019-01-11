@@ -1,5 +1,5 @@
 enum LocalStorageKey {
-    account
+    uid, money, curLevel, leftReplayCount
 }
 
 class LocalStorage {
