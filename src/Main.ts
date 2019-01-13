@@ -108,6 +108,9 @@ class Main extends egret.DisplayObjectContainer {
     private async initWeChat() {
         try {
             const url = location.href.split('#')[0];
+            if (url.indexOf('192') !== -1) {
+                return;
+            }
             const result = await Service.sing(url)
             const { data: { noncestr, signature, timestamp } } = result;
             await utils.wechat.init(noncestr, timestamp, signature);

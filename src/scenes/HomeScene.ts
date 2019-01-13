@@ -25,6 +25,9 @@ class HomeScene extends egret.DisplayObjectContainer {
         // 分享按钮
         this._ui.getChild('n8').addClickListener(this.onShare2Friend, this);
 
+        this._ui.getChild('n7').addClickListener(this.onSoundSwitch, this);
+        this._ui.getChild('n7').asButton.selected = LocalStorage.getItem(LocalStorageKey.soundEnabled);
+
         // 开始一个定时器，显示提现红包的数据
         this._timer = new egret.Timer(utils.MathUtils.getRandom(5000, 10000));
         this._timer.addEventListener(egret.TimerEvent.TIMER, this.showRedTip, this);
@@ -54,6 +57,11 @@ class HomeScene extends egret.DisplayObjectContainer {
 
     private onShare2Friend() {
         // ...
+    }
+
+    private onSoundSwitch(evt: egret.Event) {
+        LocalStorage.setItem(LocalStorageKey.soundEnabled, this._ui.getChild('n7').asButton.selected);
+        LocalStorage.saveToLocal();
     }
 
     private showRedTip() {

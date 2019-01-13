@@ -1,7 +1,7 @@
 {
 	"groups":[
 	{
-		"keys":"bg_jpg,egret_icon_png,level_json,redBag_json,ui_bin,ui_bin_atlas0",
+		"keys":"bg_jpg,egret_icon_png,level_json,redBag_json,ui_bin,ui_bin_atlas0,success_mp3,jo_mp3",
 		"name":"preload"
 	}],
 	"resources":[
@@ -33,5 +33,13 @@
 		"name":"ui_bin_atlas0",
 		"type":"image",
 		"url":"assets/Package1_atlas0.png"
+	}, {
+		"name": "jo_mp3",
+		"type": "sound",
+		"url": "assets/jo.mp3"
+	},{
+		"name": "success_mp3",
+		"type": "sound",
+		"url": "assets/success.mp3"
 	}]
 }

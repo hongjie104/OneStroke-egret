@@ -74,6 +74,7 @@
     <component id="y8ya2h" name="Alert.xml" path="/Common/" exported="true"/>
     <component id="y8ya2i" name="Panel.xml" path="/Common/"/>
     <component id="y8ya2j" name="Button.xml" path="/Common/"/>
+    <image id="m4mz2k" name="btn_11.png" path="/HomeUI/"/>
   </resources>
   <publish name="Package1" path="/Users/zhouhongjie/Documents/egret/OneStroke/resource/assets"/>
 </packageDescription>
