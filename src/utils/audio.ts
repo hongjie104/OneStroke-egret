@@ -4,7 +4,11 @@ module utils.audio {
         if(LocalStorage.getItem(LocalStorageKey.soundEnabled)) {
             const sound: egret.Sound = RES.getRes(audio);
             if (sound) {
-                sound.play(0, loops);
+                try {
+                    sound.play(0, loops);
+                } catch (e) {
+                    console.log(e);
+                }
             }
         }
     }

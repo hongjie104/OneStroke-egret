@@ -57,6 +57,7 @@ class HomeScene extends egret.DisplayObjectContainer {
 
     private onShare2Friend() {
         // ...
+        utils.audio.play('jo_mp3');
     }
 
     private onSoundSwitch(evt: egret.Event) {

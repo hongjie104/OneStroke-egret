@@ -82,9 +82,9 @@ class Main extends egret.DisplayObjectContainer {
 
     private async runGame() {
         LocalStorage.init();
+        await this.loadResource();
         await this.login();
         await this.initWeChat();
-        await this.loadResource();
         this.createGameScene();
     }
 
