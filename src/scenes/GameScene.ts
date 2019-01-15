@@ -448,6 +448,7 @@ class GameScene extends egret.DisplayObjectContainer {
         let leftReplayCount = parseInt(LocalStorage.getItem(LocalStorageKey.leftReplayCount));
         if (leftReplayCount > 0) {
             LocalStorage.setItem(LocalStorageKey.leftReplayCount, leftReplayCount - 1);
+            LocalStorage.saveToLocal();
             this.updateLeftReplayCount();
         }
         this.pathShap.graphics.clear();
