@@ -360,7 +360,8 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private onNextLevel() {
-        if (++this.curLevel > this._levelJson.length) {
+        LocalStorage.setItem(LocalStorageKey.curLevel, ++this.curLevel);
+        if (this.curLevel > this._levelJson.length) {
             // 所有的关卡都通过了。。。
         } else {
             LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, []);
