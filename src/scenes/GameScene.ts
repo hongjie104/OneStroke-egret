@@ -76,6 +76,9 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private drawCell() {
+        if (this.curLevel >= this._levelJson.length) {
+            this.curLevel = 1;
+        }
         this._ui.getChild('n9').text = `${this.curLevel}关`;
         const selectedRowAndCol = LocalStorage.getItem(LocalStorageKey.selectedRowAndCol);
         this.selectedRowAndCol = selectedRowAndCol || new Array<{ row: number, col: number }>();
@@ -362,7 +365,11 @@ class GameScene extends egret.DisplayObjectContainer {
     private onNextLevel() {
         LocalStorage.setItem(LocalStorageKey.curLevel, ++this.curLevel);
         if (this.curLevel > this._levelJson.length) {
+            this.curLevel = 1;
             // 所有的关卡都通过了。。。
+            LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, []);
+            LocalStorage.saveToLocal();
+            this.drawCell();
         } else {
             LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, []);
             LocalStorage.saveToLocal();
