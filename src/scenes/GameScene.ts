@@ -398,6 +398,7 @@ class GameScene extends egret.DisplayObjectContainer {
                 this.selectedRowAndCol.push({ row, col });
                 utils.audio.play('jo_mp3');
                 LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, this.selectedRowAndCol);
+                LocalStorage.saveToLocal();
                 this.drawSelectedCell();
             }
         }
@@ -424,6 +425,7 @@ class GameScene extends egret.DisplayObjectContainer {
         this.selectedRowAndCol.push({ row, col });
         utils.audio.play('jo_mp3');
         LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, this.selectedRowAndCol);
+        LocalStorage.saveToLocal();
         this.drawSelectedCell();
     }
 
