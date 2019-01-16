@@ -82,9 +82,9 @@ class Main extends egret.DisplayObjectContainer {
 
     private async runGame() {
         LocalStorage.init();
+        await this.loadResource();
         await this.login();
         await this.initWeChat();
-        await this.loadResource();
         this.createGameScene();
     }
 
@@ -108,6 +108,9 @@ class Main extends egret.DisplayObjectContainer {
     private async initWeChat() {
         try {
             const url = location.href.split('#')[0];
+            if (url.indexOf('192') !== -1) {
+                return;
+            }
             const result = await Service.sing(url)
             const { data: { noncestr, signature, timestamp } } = result;
             await utils.wechat.init(noncestr, timestamp, signature);
@@ -117,15 +120,15 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private async loadResource() {
+        const loadingView = new LoadingUI();
+        this.stage.addChild(loadingView);
         try {
-            const loadingView = new LoadingUI();
-            this.stage.addChild(loadingView);
             await RES.loadConfig("resource/default.res.json", "resource/");
             await RES.loadGroup("preload", 0, loadingView);
-            this.stage.removeChild(loadingView);
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e);
+        } finally {
+            this.stage.removeChild(loadingView);
         }
     }
 

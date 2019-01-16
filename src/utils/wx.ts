@@ -20,7 +20,8 @@ module utils.wechat {
                     bodyMenuShareAppMessage.title = 'this is title';
                     bodyMenuShareAppMessage.desc = 'this is desc';
                     // bodyMenuShareAppMessage.imgUrl =
-                    wx.onMenuShareAppMessage(bodyMenuShareAppMessage)
+                    wx.onMenuShareAppMessage(bodyMenuShareAppMessage);
+                    utils.audio.play('jo_mp3');
                     resolve();
                 });
                 wx.error(() => {

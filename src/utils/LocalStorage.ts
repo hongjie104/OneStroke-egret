@@ -1,5 +1,5 @@
 enum LocalStorageKey {
-    uid, money, curLevel, leftReplayCount
+    uid, money, curLevel, leftReplayCount, selectedRowAndCol, soundEnabled,
 }
 
 class LocalStorage {
@@ -13,7 +13,7 @@ class LocalStorage {
             LocalStorage._isInited = true;
             const s = egret.localStorage.getItem('oneStroke');
             if (!s) {
-                LocalStorage.localStorageData = [];
+                LocalStorage.localStorageData = ['', 0, 1, 3, [], true];
             } else {
                 LocalStorage.localStorageData = JSON.parse(s);
             }

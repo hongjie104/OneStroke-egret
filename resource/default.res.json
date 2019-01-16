@@ -1,20 +1,10 @@
 {
 	"groups":[
 	{
-		"keys":"bg_jpg,egret_icon_png,level_json,redBag_json,ui_bin,ui_bin_atlas0",
+		"keys":"jo_mp3,level_json,redBag_json,ui_bin,ui_bin_atlas0",
 		"name":"preload"
 	}],
 	"resources":[
-	{
-		"name":"bg_jpg",
-		"type":"image",
-		"url":"assets/bg.jpg"
-	},
-	{
-		"name": "egret_icon_png",
-		"type": "image",
-		"url": "assets/egret_icon.png"
-	},
 	{
 		"name":"level_json",
 		"type":"json",
@@ -33,5 +23,13 @@
 		"name":"ui_bin_atlas0",
 		"type":"image",
 		"url":"assets/Package1_atlas0.png"
+	}, {
+		"name": "jo_mp3",
+		"type": "sound",
+		"url": "assets/jo.mp3"
+	},{
+		"name": "success_mp3",
+		"type": "sound",
+		"url": "assets/success.mp3"
 	}]
 }

@@ -76,8 +76,12 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private drawCell() {
+        if (this.curLevel >= this._levelJson.length) {
+            this.curLevel = 1;
+        }
         this._ui.getChild('n9').text = `${this.curLevel}关`;
-        this.selectedRowAndCol = new Array<{ row: number, col: number }>();
+        const selectedRowAndCol = LocalStorage.getItem(LocalStorageKey.selectedRowAndCol);
+        this.selectedRowAndCol = selectedRowAndCol || new Array<{ row: number, col: number }>();
         if (!this.cellContainer) {
             this.cellContainer = new egret.DisplayObjectContainer();
         }
@@ -108,7 +112,15 @@ class GameScene extends egret.DisplayObjectContainer {
 
                 if (levelData.map[row][col] === 2) {
                     // 起点
-                    this.selectedRowAndCol.push({ row, col });
+                    if (this.selectedRowAndCol.length === 0) {
+                        this.selectedRowAndCol.push({ row, col });
+                    } else if (this.selectedRowAndCol[0].row !== row || this.selectedRowAndCol[0].col !== col) {
+                        // 这就有问题了
+                        this.selectedRowAndCol.length = 1;
+                        this.selectedRowAndCol[0] = { row, col };
+                        LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, this.selectedRowAndCol);
+                        LocalStorage.saveToLocal();
+                    }
                 }
             }
         }
@@ -271,6 +283,7 @@ class GameScene extends egret.DisplayObjectContainer {
         }
         if (success) {
             // 成功了，跳到下一关
+            utils.audio.play('success_mp3');
             this.pathShap.graphics.clear();
             const t: number = setTimeout(() => {
                 clearTimeout(t);
@@ -288,6 +301,10 @@ class GameScene extends egret.DisplayObjectContainer {
         Service.passLevel().then(() => {
             const p = SuccessPanel.instance;
             p.show();
+            // 重置重玩的次数
+            LocalStorage.setItem(LocalStorageKey.leftReplayCount, 3);
+            this.updateLeftReplayCount();
+
             if (!p.hasEventListener(GameEvent.NEXT_LEVEL)) {
                 p.addEventListener(GameEvent.NEXT_LEVEL, this.onShowGetRedBagPanel, this);
             }
@@ -346,9 +363,16 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private onNextLevel() {
-        if (++this.curLevel > this._levelJson.length) {
+        LocalStorage.setItem(LocalStorageKey.curLevel, ++this.curLevel);
+        if (this.curLevel > this._levelJson.length) {
+            this.curLevel = 1;
             // 所有的关卡都通过了。。。
+            LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, []);
+            LocalStorage.saveToLocal();
+            this.drawCell();
         } else {
+            LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, []);
+            LocalStorage.saveToLocal();
             this.drawCell();
         }
     }
@@ -372,6 +396,8 @@ class GameScene extends egret.DisplayObjectContainer {
             const lastCol = this.selectedRowAndCol[l - 1].col;
             if (Math.abs(lastRow - row) + Math.abs(lastCol - col) === 1) {
                 this.selectedRowAndCol.push({ row, col });
+                utils.audio.play('jo_mp3');
+                LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, this.selectedRowAndCol);
                 this.drawSelectedCell();
             }
         }
@@ -396,10 +422,13 @@ class GameScene extends egret.DisplayObjectContainer {
             }
         }
         this.selectedRowAndCol.push({ row, col });
+        utils.audio.play('jo_mp3');
+        LocalStorage.setItem(LocalStorageKey.selectedRowAndCol, this.selectedRowAndCol);
         this.drawSelectedCell();
     }
 
     private onBack() {
+        LocalStorage.saveToLocal();
         this.dispatchEvent(new GameEvent(GameEvent.GO_TO_HOME));
     }
 
@@ -426,8 +455,10 @@ class GameScene extends egret.DisplayObjectContainer {
         let leftReplayCount = parseInt(LocalStorage.getItem(LocalStorageKey.leftReplayCount));
         if (leftReplayCount > 0) {
             LocalStorage.setItem(LocalStorageKey.leftReplayCount, leftReplayCount - 1);
+            LocalStorage.saveToLocal();
             this.updateLeftReplayCount();
         }
+        this.pathShap.graphics.clear();
         this.selectedRowAndCol.length = 1;
         this.drawSelectedCell();
     }
