@@ -47,7 +47,8 @@ module utils.wechat {
                     bodyMenuShareAppMessage.title = randomArr[state - 1].title;
                     bodyMenuShareAppMessage.desc = randomArr[state - 1].desc;
                     bodyMenuShareAppMessage.imgUrl = 'https://www.bidapei.com/redbag.jpg';
-                    bodyMenuShareAppMessage.link = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc32a98e6039c198f&redirect_uri=https%3A%2F%2Fwww.bidapei.com&response_type=code&scope=snsapi_userinfo&state=${state}#wechat_redirect`;
+                    // bodyMenuShareAppMessage.link = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc32a98e6039c198f&redirect_uri=https%3A%2F%2Fwww.bidapei.com&response_type=code&scope=snsapi_userinfo&state=${state}#wechat_redirect`;
+                    bodyMenuShareAppMessage.link = `https://www.bidapei.com/server/api/user/redirect/${state}`;
                     wx.onMenuShareAppMessage(bodyMenuShareAppMessage);
                     utils.audio.play('jo_mp3');
                     resolve();

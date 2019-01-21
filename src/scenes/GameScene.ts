@@ -53,7 +53,7 @@ class GameScene extends egret.DisplayObjectContainer {
 
     private updateLeftReplayCount() {
         const leftReplayCount = LocalStorage.getItem(LocalStorageKey.leftReplayCount);
-        this._ui.getChild('n3').asCom.getChild('n3').text = `(${Math.min(leftReplayCount, 0)}次机会)`;
+        this._ui.getChild('n3').asCom.getChild('n3').text = `(${Math.max(leftReplayCount, 0)}次机会)`;
     }
 
     private onAddToStage() {
