@@ -49,6 +49,7 @@ class HomeScene extends egret.DisplayObjectContainer {
 
     private onStartGame() {
         this.dispatchEvent(new GameEvent(GameEvent.START_GAME));
+        TDAPP.onEvent('点击开始游戏');
     }
 
     private onShowRedBagPanel() {

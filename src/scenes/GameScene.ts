@@ -435,6 +435,7 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private onReplay() {
+        TDAPP.onEvent('点击重玩按钮');
         Service.tryReplay().then(({ data }) => {
             if (data) {
                 this.doReplay();
@@ -454,6 +455,7 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private doReplay() {
+        TDAPP.onEvent('点击重玩时的支付按钮');
         let leftReplayCount = parseInt(LocalStorage.getItem(LocalStorageKey.leftReplayCount));
         if (leftReplayCount > 0) {
             LocalStorage.setItem(LocalStorageKey.leftReplayCount, leftReplayCount - 1);
@@ -466,6 +468,7 @@ class GameScene extends egret.DisplayObjectContainer {
     }
 
     private onDollarTip() {
+        TDAPP.onEvent('点击获取提示');
         Alert.instance.once(GameEvent.PAY_SUCCESS, this.onPaySuccess, this);
         Alert.instance.show({
             title: '获取提示',
@@ -477,6 +480,7 @@ class GameScene extends egret.DisplayObjectContainer {
 
     // 支付成功
     private onPaySuccess() {
+        TDAPP.onEvent('点击提示时的支付按钮');
         const path = utils.oneStroke.getPath(this._levelJson[this.curLevel - 1].map);
         // console.log(path);
         let lastP: utils.oneStroke.Point = null;
